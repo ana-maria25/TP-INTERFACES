@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Profesionales disponibles | TurnoSalud</title>
+    <link rel="stylesheet" href="../css/styles.css" />
+  </head>
+
+  <body>
+    <!-- ENCABEZADO -->
+    <header class="header">
+      <div class="logo">
+        <h2>OesteSalud</h2>
+        <span>Tu salud, más cerca</span>
+      </div>
+
+      <nav class="nav">
+        <a href="../index.html">Inicio</a>
+        <a href="panel-principal.html">Mi panel</a>
+        <a href="#">Mis turnos</a>
+        <a href="#">Mis estudios</a>
+      </nav>
+
+      <div class="user-menu">
+        <span class="user-name">Hola, María</span>
+        <a href="../index.html" class="logout">Cerrar sesión</a>
+      </div>
+    </header>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="availability-container">
+      <div class="availability-header">
+        <a href="solicitar-turno.html" class="back-link">
+          ← Volver a los datos del turno
+        </a>
+
+        <h1>Profesionales disponibles</h1>
+
+        <p>Elegí el profesional y el horario que mejor se adapte a vos.</p>
+      </div>
+
+      <!-- RESUMEN DE LA BÚSQUEDA -->
+      <section class="search-summary">
+        <div>
+          <span>Especialidad</span>
+          <strong>Clínica médica</strong>
+        </div>
+
+        <div>
+          <span>Sede</span>
+          <strong>San Justo</strong>
+        </div>
+
+        <div>
+          <span>Cobertura</span>
+          <strong>Obra social</strong>
+        </div>
+
+        <a href="solicitar-turno.html">Modificar búsqueda</a>
+      </section>
+
+      <!-- INDICADOR DE PASOS -->
+      <div class="booking-steps">
+        <div class="step completed">
+          <span>✓</span>
+          <p>Datos del turno</p>
+        </div>
+
+        <div class="step active">
+          <span>2</span>
+          <p>Profesional y horario</p>
+        </div>
+
+        <div class="step">
+          <span>3</span>
+          <p>Confirmación</p>
+        </div>
+      </div>
+
+      <!-- LISTADO DE PROFESIONALES -->
+      <section class="professionals-section">
+        <h2>Seleccioná un profesional</h2>
+
+        <p class="availability-description">
+          Estos son los profesionales que tienen disponibilidad para la
+          especialidad y sede seleccionadas.
+        </p>
+
+        <!-- PROFESIONAL 1 -->
+        <article class="professional-card">
+          <div class="doctor-info">
+            <div class="doctor-avatar">LF</div>
+
+            <div>
+              <h3>Dra. Laura Fernández</h3>
+              <p>Clínica médica</p>
+              <span class="doctor-location">Sede San Justo</span>
+            </div>
+          </div>
+
+          <div class="doctor-availability">
+            <h4>Días disponibles</h4>
+
+            <div class="available-days">
+              <span>Mar 17/11</span>
+              <span>Mié 18/11</span>
+              <span>Vie 20/11</span>
+            </div>
+
+            <h4>Horarios disponibles</h4>
+
+            <div class="available-times">
+              <label class="time-option">
+                <input type="radio" name="horario" value="17-11-09:00" />
+                <span>09:00</span>
+              </label>
+
+              <label class="time-option">
+                <input type="radio" name="horario" value="17-11-10:30" />
+                <span>10:30</span>
+              </label>
+
+              <label class="time-option">
+                <input type="radio" name="horario" value="18-11-11:00" />
+                <span>11:00</span>
+              </label>
+
+              <label class="time-option">
+                <input type="radio" name="horario" value="20-11-14:00" />
+                <span>14:00</span>
+              </label>
+            </div>
+          </div>
+        </article>
+
+        <!-- PROFESIONAL 2 -->
+        <article class="professional-card">
+          <div class="doctor-info">
+            <div class="doctor-avatar">RM</div>
+
+            <div>
+              <h3>Dr. Ricardo Martínez</h3>
+              <p>Clínica médica</p>
+              <span class="doctor-location">Sede San Justo</span>
+            </div>
+          </div>
+
+          <div class="doctor-availability">
+            <h4>Días disponibles</h4>
+
+            <div class="available-days">
+              <span>Lun 16/11</span>
+              <span>Jue 19/11</span>
+            </div>
+
+            <h4>Horarios disponibles</h4>
+
+            <div class="available-times">
+              <label class="time-option">
+                <input type="radio" name="horario" value="16-11-08:30" />
+                <span>08:30</span>
+              </label>
+
+              <label class="time-option">
+                <input type="radio" name="horario" value="16-11-09:30" />
+                <span>09:30</span>
+              </label>
+
+              <label class="time-option">
+                <input type="radio" name="horario" value="19-11-12:00" />
+                <span>12:00</span>
+              </label>
+            </div>
+          </div>
+        </article>
+
+        <!-- PROFESIONAL 3 -->
+        <article class="professional-card">
+          <div class="doctor-info">
+            <div class="doctor-avatar">SG</div>
+
+            <div>
+              <h3>Dra. Sofía Gómez</h3>
+              <p>Clínica médica</p>
+              <span class="doctor-location">Sede San Justo</span>
+            </div>
+          </div>
+
+          <div class="doctor-availability">
+            <h4>Días disponibles</h4>
+
+            <div class="available-days">
+              <span>Mié 18/11</span>
+              <span>Vie 20/11</span>
+            </div>
+
+            <h4>Horarios disponibles</h4>
+
+            <div class="available-times">
+              <label class="time-option">
+                <input type="radio" name="horario" value="18-11-15:00" />
+                <span>15:00</span>
+              </label>
+
+              <label class="time-option">
+                <input type="radio" name="horario" value="18-11-16:00" />
+                <span>16:00</span>
+              </label>
+
+              <label class="time-option">
+                <input type="radio" name="horario" value="20-11-10:00" />
+                <span>10:00</span>
+              </label>
+            </div>
+          </div>
+        </article>
+
+        <!-- BOTONES -->
+        <div class="availability-buttons">
+          <a href="solicitar-turno.html" class="btn-cancel"> Volver </a>
+
+          <a href="confirmar-turno.html" class="btn-primary"> Continuar → </a>
+        </div>
+      </section>
+    </main>
+
+    <!-- PIE DE PÁGINA -->
+    <footer class="footer">
+      <p>© 2026 OesteSalud | TurnoSalud. Todos los derechos reservados.</p>
+    </footer>
+  </body>
+</html>

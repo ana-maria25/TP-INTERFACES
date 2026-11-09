@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Solicitar turno | TurnoSalud</title>
+    <link rel="stylesheet" href="../css/styles.css" />
+  </head>
+
+  <body>
+    <!-- ENCABEZADO -->
+    <header class="header">
+      <div class="logo">
+        <h2>OesteSalud</h2>
+        <span>Tu salud, más cerca</span>
+      </div>
+
+      <nav class="nav">
+        <a href="../index.html">Inicio</a>
+        <a href="panel-principal.html">Mi panel</a>
+        <a href="#">Mis turnos</a>
+        <a href="#">Mis estudios</a>
+      </nav>
+
+      <div class="user-menu">
+        <span class="user-name">Hola, María</span>
+        <a href="../index.html" class="logout">Cerrar sesión</a>
+      </div>
+    </header>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="booking-container">
+      <div class="booking-header">
+        <a href="panel-principal.html" class="back-link">← Volver al panel</a>
+
+        <h1>Solicitar un turno</h1>
+
+        <p>Completá los siguientes datos para encontrar un turno disponible.</p>
+      </div>
+
+      <!-- INDICADOR DE PASOS -->
+      <div class="booking-steps">
+        <div class="step active">
+          <span>1</span>
+          <p>Datos del turno</p>
+        </div>
+
+        <div class="step">
+          <span>2</span>
+          <p>Profesional y horario</p>
+        </div>
+
+        <div class="step">
+          <span>3</span>
+          <p>Confirmación</p>
+        </div>
+      </div>
+
+      <!-- FORMULARIO -->
+      <section class="booking-form">
+        <h2>Datos para tu consulta</h2>
+
+        <p class="form-description">
+          Indicá para quién es el turno y seleccioná las opciones
+          correspondientes.
+        </p>
+
+        <!-- SELECCIONAR PACIENTE -->
+        <div class="form-group">
+          <label for="paciente">¿Para quién es el turno?</label>
+
+          <select id="paciente" name="paciente">
+            <option value="">Seleccionar paciente</option>
+            <option value="yo">Para mí - María González</option>
+            <option value="familiar">Para un familiar</option>
+          </select>
+        </div>
+
+        <!-- COBERTURA -->
+        <div class="form-group">
+          <label for="cobertura">Tipo de cobertura</label>
+
+          <select id="cobertura" name="cobertura">
+            <option value="">Seleccionar cobertura</option>
+            <option value="obra-social">Obra social</option>
+            <option value="prepaga">Prepaga</option>
+            <option value="particular">Particular</option>
+          </select>
+        </div>
+
+        <!-- ESPECIALIDAD -->
+        <div class="form-group">
+          <label for="especialidad">Especialidad médica</label>
+
+          <select id="especialidad" name="especialidad">
+            <option value="">Seleccionar especialidad</option>
+            <option value="clinica">Clínica médica</option>
+            <option value="cardiologia">Cardiología</option>
+            <option value="dermatologia">Dermatología</option>
+            <option value="ginecologia">Ginecología</option>
+            <option value="pediatria">Pediatría</option>
+            <option value="traumatologia">Traumatología</option>
+            <option value="oftalmologia">Oftalmología</option>
+            <option value="odontologia">Odontología</option>
+          </select>
+        </div>
+
+        <!-- SEDE -->
+        <div class="form-group">
+          <label for="sede">Centro de atención</label>
+
+          <select id="sede" name="sede">
+            <option value="">Seleccionar sede</option>
+            <option value="san-justo">San Justo</option>
+            <option value="ramos-mejia">Ramos Mejía</option>
+            <option value="moron">Morón</option>
+            <option value="laferrere">Laferrere</option>
+          </select>
+
+          <small
+            >La disponibilidad dependerá de la especialidad y sede
+            seleccionadas.</small
+          >
+        </div>
+
+        <!-- BOTONES -->
+        <div class="form-buttons">
+          <a href="panel-principal.html" class="btn-cancel"> Cancelar </a>
+
+          <a href="profesionales-disponibilidad.html" class="btn-primary">
+            Continuar →
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <!-- PIE DE PÁGINA -->
+    <footer class="footer">
+      <p>© 2026 OesteSalud | TurnoSalud. Todos los derechos reservados.</p>
+    </footer>
+  </body>
+</html>

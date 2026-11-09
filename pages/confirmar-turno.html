@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Confirmar turno | TurnoSalud</title>
+    <link rel="stylesheet" href="../css/styles.css" />
+  </head>
+
+  <body>
+    <!-- ENCABEZADO -->
+    <header class="header">
+      <div class="logo">
+        <h2>OesteSalud</h2>
+        <span>Tu salud, más cerca</span>
+      </div>
+
+      <nav class="nav">
+        <a href="../index.html">Inicio</a>
+        <a href="panel-principal.html">Mi panel</a>
+        <a href="#">Mis turnos</a>
+        <a href="#">Mis estudios</a>
+      </nav>
+
+      <div class="user-menu">
+        <span class="user-name">Hola, María</span>
+        <a href="../index.html" class="logout">Cerrar sesión</a>
+      </div>
+    </header>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="confirmation-container">
+      <div class="confirmation-header">
+        <a href="profesionales-disponibilidad.html" class="back-link">
+          ← Volver a profesionales y horarios
+        </a>
+
+        <h1>Confirmación del turno</h1>
+
+        <p>
+          Revisá que los datos sean correctos antes de confirmar tu reserva.
+        </p>
+      </div>
+
+      <!-- INDICADOR DE PASOS -->
+      <div class="booking-steps">
+        <div class="step completed">
+          <span>✓</span>
+          <p>Datos del turno</p>
+        </div>
+
+        <div class="step completed">
+          <span>✓</span>
+          <p>Profesional y horario</p>
+        </div>
+
+        <div class="step active">
+          <span>3</span>
+          <p>Confirmación</p>
+        </div>
+      </div>
+
+      <!-- RESUMEN DEL TURNO -->
+      <section class="confirmation-card" id="confirmationDetails">
+        <div class="confirmation-card-header">
+          <h2>Resumen de tu turno</h2>
+          <span class="review-label">Pendiente de confirmación</span>
+        </div>
+
+        <!-- DATOS DEL PACIENTE -->
+        <div class="confirmation-section">
+          <h3>Datos del paciente</h3>
+
+          <div class="detail-row">
+            <span>Paciente</span>
+            <strong>María González</strong>
+          </div>
+
+          <div class="detail-row">
+            <span>DNI</span>
+            <strong>XX.XXX.XXX</strong>
+          </div>
+        </div>
+
+        <!-- COBERTURA -->
+        <div class="confirmation-section">
+          <h3>Cobertura médica</h3>
+
+          <div class="detail-row">
+            <span>Tipo de cobertura</span>
+            <strong>Obra social</strong>
+          </div>
+
+          <div class="detail-row">
+            <span>Prestación</span>
+            <strong>Clínica médica</strong>
+          </div>
+        </div>
+
+        <!-- PROFESIONAL Y SEDE -->
+        <div class="confirmation-section">
+          <h3>Centro y profesional</h3>
+
+          <div class="detail-row">
+            <span>Centro de atención</span>
+            <strong>OesteSalud - San Justo</strong>
+          </div>
+
+          <div class="detail-row">
+            <span>Profesional</span>
+            <strong>Dra. Laura Fernández</strong>
+          </div>
+
+          <div class="detail-row">
+            <span>Especialidad</span>
+            <strong>Clínica médica</strong>
+          </div>
+        </div>
+
+        <!-- FECHA Y HORARIO -->
+        <div class="confirmation-section">
+          <h3>Fecha y horario</h3>
+
+          <div class="detail-row">
+            <span>Fecha</span>
+            <strong>Miércoles 18 de noviembre de 2026</strong>
+          </div>
+
+          <div class="detail-row">
+            <span>Horario</span>
+            <strong>11:00 hs</strong>
+          </div>
+        </div>
+
+        <!-- BOTONES -->
+        <div class="confirmation-buttons">
+          <a href="profesionales-disponibilidad.html" class="btn-cancel">
+            Modificar datos
+          </a>
+
+          <button type="button" class="btn-primary" id="confirmButton">
+            Confirmar turno
+          </button>
+        </div>
+      </section>
+
+      <!-- MENSAJE DE RESERVA EXITOSA -->
+      <section class="success-message" id="successMessage" hidden>
+        <div class="success-icon">✓</div>
+
+        <h2>¡Tu turno fue confirmado!</h2>
+
+        <p>La reserva se realizó correctamente. Te esperamos en OesteSalud.</p>
+
+        <div class="success-details">
+          <span>Número de reserva</span>
+          <strong>OS-2026-00125</strong>
+        </div>
+
+        <p class="success-note">
+          Recordá presentarte unos minutos antes del horario asignado.
+        </p>
+
+        <a href="panel-principal.html" class="btn-primary"> Ir a mi panel </a>
+      </section>
+    </main>
+
+    <!-- PIE DE PÁGINA -->
+    <footer class="footer">
+      <p>© 2026 OesteSalud | TurnoSalud. Todos los derechos reservados.</p>
+    </footer>
+
+    <!-- INTERACCIÓN DEL BOTÓN -->
+    <script>
+      const confirmButton = document.getElementById("confirmButton");
+
+      confirmButton.addEventListener("click", function () {
+        document.getElementById("confirmationDetails").hidden = true;
+
+        document.getElementById("successMessage").hidden = false;
+
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
+      });
+    </script>
+  </body>
+</html>
