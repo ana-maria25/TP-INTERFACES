@@ -5,26 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Confirmar turno | TurnoSalud</title>
     <link rel="stylesheet" href="../css/styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap"
+      rel="stylesheet"
+    />
   </head>
 
   <body>
-    <!-- ENCABEZADO -->
-    <header class="header">
-      <div class="logo">
-        <h2>OesteSalud</h2>
-        <span>Tu salud, más cerca</span>
-      </div>
+    <header class="site-header">
+      <div class="container nav-wrap">
+        <a class="brand" href="../index.html" aria-label="OesteSalud, inicio">
+          <span class="brand-mark" aria-hidden="true">+</span>
+          <span
+            >Oeste<span class="brand-accent">Salud</span
+            ><small>INSTITUCIÓN MÉDICA</small></span
+          >
+        </a>
 
-      <nav class="nav">
-        <a href="../index.html">Inicio</a>
-        <a href="panel-principal.html">Mi panel</a>
-        <a href="#">Mis turnos</a>
-        <a href="#">Mis estudios</a>
-      </nav>
+        <nav class="main-nav" aria-label="Navegación principal">
+          <a href="../index.html#servicios">Servicios</a>
+          <a href="../index.html#sedes">Nuestras sedes</a>
+          <a href="../index.html#nosotros">Quiénes somos</a>
+        </nav>
 
-      <div class="user-menu">
-        <span class="user-name">Hola, María</span>
-        <a href="../index.html" class="logout">Cerrar sesión</a>
+        <div class="nav-actions logged-in-actions">
+          <span class="login-link">Hola, María</span>
+          <a class="button button-small" href="../index.html">Cerrar sesión</a>
+        </div>
       </div>
     </header>
 
@@ -166,8 +175,10 @@
     </main>
 
     <!-- PIE DE PÁGINA -->
-    <footer class="footer">
-      <p>© 2026 OesteSalud | TurnoSalud. Todos los derechos reservados.</p>
+    <footer>
+      <div class="container footer-inner">
+        © 2026 OesteSalud | TurnoSalud. Todos los derechos reservados.
+      </div>
     </footer>
 
     <!-- INTERACCIÓN DEL BOTÓN -->

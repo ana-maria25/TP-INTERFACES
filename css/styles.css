@@ -574,15 +574,15 @@ h2 {
   font-size: 9px;
 }
 footer {
-  padding: 22px 0;
-  background: #173b52;
-  color: #d4e1e5;
+  padding: 20px;
+  background-color: #123f50;
+  color: white;
+  text-align: center;
+  font-size: 13px;
 }
 .footer-inner {
-  display: flex;
-  justify-content: space-between;
-  gap: 20px;
-  font-size: 10px;
+  text-align: center;
+  font-size: inherit;
 }
 
 /* Adaptación básica para pantallas más angostas */
@@ -641,6 +641,9 @@ footer {
   }
   .login-link {
     font-size: 11px;
+  }
+  .logged-in-actions .login-link {
+    display: none;
   }
   .button-small {
     min-height: 37px;
@@ -898,14 +901,6 @@ footer {
   color: #087f8c;
   text-decoration: none;
   font-size: 14px;
-}
-
-.footer {
-  background-color: #123f50;
-  color: white;
-  text-align: center;
-  padding: 20px;
-  font-size: 13px;
 }
 
 /* ADAPTACIÓN A CELULARES */
