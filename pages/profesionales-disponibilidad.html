@@ -31,7 +31,7 @@
         </nav>
 
         <div class="nav-actions logged-in-actions">
-          <span class="login-link">Hola, María</span>
+          <span class="login-link">Hola, Ana María</span>
           <a class="button button-small" href="../index.html">Cerrar sesión</a>
         </div>
       </div>
@@ -112,31 +112,31 @@
             <h4>Días disponibles</h4>
 
             <div class="available-days">
-              <span>Mar 17/11</span>
-              <span>Mié 18/11</span>
-              <span>Vie 20/11</span>
+              <button type="button" class="day-option" aria-pressed="false">Mar 24/11</button>
+              <button type="button" class="day-option" aria-pressed="false">Mié 25/11</button>
+              <button type="button" class="day-option" aria-pressed="false">Vie 27/11</button>
             </div>
 
             <h4>Horarios disponibles</h4>
 
             <div class="available-times">
               <label class="time-option">
-                <input type="radio" name="horario" value="17-11-09:00" />
+                <input type="radio" name="horario" value="24-11-09:00" />
                 <span>09:00</span>
               </label>
 
               <label class="time-option">
-                <input type="radio" name="horario" value="17-11-10:30" />
+                <input type="radio" name="horario" value="24-11-10:30" />
                 <span>10:30</span>
               </label>
 
               <label class="time-option">
-                <input type="radio" name="horario" value="18-11-11:00" />
+                <input type="radio" name="horario" value="25-11-11:00" />
                 <span>11:00</span>
               </label>
 
               <label class="time-option">
-                <input type="radio" name="horario" value="20-11-14:00" />
+                <input type="radio" name="horario" value="27-11-14:00" />
                 <span>14:00</span>
               </label>
             </div>
@@ -159,25 +159,25 @@
             <h4>Días disponibles</h4>
 
             <div class="available-days">
-              <span>Lun 16/11</span>
-              <span>Jue 19/11</span>
+              <button type="button" class="day-option" aria-pressed="false">Jue 26/11</button>
+              <button type="button" class="day-option" aria-pressed="false">Vie 27/11</button>
             </div>
 
             <h4>Horarios disponibles</h4>
 
             <div class="available-times">
               <label class="time-option">
-                <input type="radio" name="horario" value="16-11-08:30" />
+                <input type="radio" name="horario" value="26-11-08:30" />
                 <span>08:30</span>
               </label>
 
               <label class="time-option">
-                <input type="radio" name="horario" value="16-11-09:30" />
+                <input type="radio" name="horario" value="26-11-09:30" />
                 <span>09:30</span>
               </label>
 
               <label class="time-option">
-                <input type="radio" name="horario" value="19-11-12:00" />
+                <input type="radio" name="horario" value="27-11-12:00" />
                 <span>12:00</span>
               </label>
             </div>
@@ -200,25 +200,25 @@
             <h4>Días disponibles</h4>
 
             <div class="available-days">
-              <span>Mié 18/11</span>
-              <span>Vie 20/11</span>
+              <button type="button" class="day-option" aria-pressed="false">Mié 25/11</button>
+              <button type="button" class="day-option" aria-pressed="false">Vie 27/11</button>
             </div>
 
             <h4>Horarios disponibles</h4>
 
             <div class="available-times">
               <label class="time-option">
-                <input type="radio" name="horario" value="18-11-15:00" />
+                <input type="radio" name="horario" value="25-11-15:00" />
                 <span>15:00</span>
               </label>
 
               <label class="time-option">
-                <input type="radio" name="horario" value="18-11-16:00" />
+                <input type="radio" name="horario" value="25-11-16:00" />
                 <span>16:00</span>
               </label>
 
               <label class="time-option">
-                <input type="radio" name="horario" value="20-11-10:00" />
+                <input type="radio" name="horario" value="27-11-10:00" />
                 <span>10:00</span>
               </label>
             </div>
@@ -233,6 +233,19 @@
         </div>
       </section>
     </main>
+
+    <script>
+      document.querySelectorAll(".professional-card").forEach((card) => {
+        card.querySelector(".available-days").addEventListener("click", (event) => {
+          const button = event.target.closest(".day-option");
+          if (!button) return;
+          card.querySelectorAll(".day-option").forEach((day) => {
+            day.classList.toggle("selected", day === button);
+            day.setAttribute("aria-pressed", String(day === button));
+          });
+        });
+      });
+    </script>
 
     <!-- PIE DE PÁGINA -->
     <footer>

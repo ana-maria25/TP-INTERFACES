@@ -31,7 +31,7 @@
         </nav>
 
         <div class="nav-actions logged-in-actions">
-          <span class="login-link">Hola, María</span>
+          <span class="login-link">Hola, Ana María</span>
           <a class="button button-small" href="../index.html">Cerrar sesión</a>
         </div>
       </div>
@@ -41,35 +41,43 @@
     <main class="dashboard">
       <section class="welcome">
         <div>
-          <h1>¡Hola, María!</h1>
+          <span class="dashboard-kicker">ESPACIO PERSONAL</span>
+          <h1>¡Hola, Ana María!</h1>
           <p>Bienvenida a tu espacio personal de TurnoSalud.</p>
+          <a href="solicitar-turno.html" class="btn-primary"
+            >+ Solicitar un turno</a
+          >
         </div>
-
-        <a href="solicitar-turno.html" class="btn-primary"
-          >+ Solicitar un turno</a
-        >
       </section>
 
-      <!-- PRÓXIMO TURNO -->
-      <section class="next-appointment">
-        <div class="section-heading">
-          <h2>Tu próximo turno</h2>
-          <span class="status">Confirmado</span>
-        </div>
-
-        <div class="appointment-info">
-          <div class="appointment-icon">✚</div>
-
-          <div class="appointment-details">
-            <h3>Clínica médica</h3>
-            <p><strong>Profesional:</strong> Dra. Laura Fernández</p>
-            <p><strong>Fecha:</strong> 18 de noviembre de 2026</p>
-            <p><strong>Horario:</strong> 10:30 hs</p>
-            <p><strong>Sede:</strong> OesteSalud - San Justo</p>
+      <section class="appointments-layout" aria-label="Turnos próximos">
+        <div class="next-appointments">
+          <div class="section-heading">
+            <div>
+              <h2>Otros turnos próximos</h2>
+              <label class="turn-horizon" for="turnHorizon">Disponibilidad de los próximos</label>
+            </div>
+            <select id="turnHorizon">
+              <option value="14">2 semanas</option>
+              <option value="30">1 mes</option>
+            </select>
           </div>
-
-          <a href="#" class="btn-secondary">Ver detalles</a>
+          <div class="appointment-carousel" aria-live="polite">
+            <button type="button" class="carousel-control" id="previousAppointment" aria-label="Ver turno anterior">‹</button>
+            <div class="appointment-info" id="appointmentSlide"></div>
+            <button type="button" class="carousel-control" id="nextAppointment" aria-label="Ver turno siguiente">›</button>
+          </div>
+          <div class="carousel-indicators" id="appointmentIndicators" aria-label="Elegir turno"></div>
         </div>
+
+        <aside class="upcoming-highlight">
+          <span class="highlight-label">PRÓXIMO TURNO</span>
+          <div class="highlight-date"><strong id="nextAppointmentDay">24</strong><span id="nextAppointmentMonth">NOV</span></div>
+          <h3 id="nextAppointmentSpecialty">Clínica médica</h3>
+          <p id="nextAppointmentTime">10:30 hs</p>
+          <p id="nextAppointmentProfessional">Dra. Laura Fernández</p>
+          <span class="status">Confirmado</span>
+        </aside>
       </section>
 
       <!-- ACCESOS RÁPIDOS -->
@@ -84,24 +92,17 @@
             <span>Ingresar →</span>
           </a>
 
-          <a href="#" class="access-card">
+          <a href="agregar-familiar.html" class="access-card">
             <div class="access-icon">👨‍👩‍👧</div>
             <h3>Mi familia</h3>
-            <p>Gestioná los turnos de tus familiares desde tu cuenta.</p>
-            <span>Ingresar →</span>
+            <p>Administrá las personas que pueden atenderse desde tu cuenta.</p>
+            <span>Gestionar familia →</span>
           </a>
 
-          <a href="#" class="access-card">
+          <a href="mis-estudios.html" class="access-card">
             <div class="access-icon">📋</div>
             <h3>Mis estudios</h3>
             <p>Consultá y descargá los resultados de tus estudios.</p>
-            <span>Ingresar →</span>
-          </a>
-
-          <a href="#" class="access-card">
-            <div class="access-icon">🗓️</div>
-            <h3>Mis turnos</h3>
-            <p>Revisá tus próximas citas y el historial de turnos.</p>
             <span>Ingresar →</span>
           </a>
         </div>
@@ -126,8 +127,89 @@
     <!-- PIE DE PÁGINA -->
     <footer>
       <div class="container footer-inner">
-        © 2026 OesteSalud | TurnoSalud. Todos los derechos reservados.
+        <div>
+          <strong>OesteSalud | TurnoSalud</strong>
+          <p>Av. Rivadavia 13.850, Ramos Mejía · Zona Oeste</p>
+          <p>Atención: lunes a viernes de 8 a 20 hs · (011) 4658-2040</p>
+          <a href="mailto:contacto@oestesalud.com.ar">contacto@oestesalud.com.ar</a>
+        </div>
+        <small>© 2026 OesteSalud. Institución ficticia para el proyecto académico.</small>
       </div>
     </footer>
+    <script>
+      const appointments = [
+        { specialty: "Clínica médica", professional: "Dra. Laura Fernández", date: "Martes 24 de noviembre", day: "24", month: "NOV", time: "10:30 hs", place: "OesteSalud - San Justo", daysAhead: 5 },
+        { specialty: "Cardiología", professional: "Dr. Ricardo Martínez", date: "Viernes 27 de noviembre", day: "27", month: "NOV", time: "09:00 hs", place: "OesteSalud - Ramos Mejía", daysAhead: 8 },
+        { specialty: "Dermatología", professional: "Dra. Sofía Gómez", date: "Martes 1 de diciembre", day: "1", month: "DIC", time: "11:15 hs", place: "OesteSalud - Morón", daysAhead: 12 },
+        { specialty: "Oftalmología", professional: "Dr. Pablo Ruiz", date: "Viernes 4 de diciembre", day: "4", month: "DIC", time: "14:00 hs", place: "OesteSalud - San Justo", daysAhead: 15 },
+      ];
+      let activeAppointment = 0;
+      let visibleAppointments = appointments.filter(({ daysAhead }) => daysAhead <= 14);
+      let carouselAppointments = visibleAppointments.slice(1);
+      const slide = document.getElementById("appointmentSlide");
+      const indicators = document.getElementById("appointmentIndicators");
+      const previousButton = document.getElementById("previousAppointment");
+      const nextButton = document.getElementById("nextAppointment");
+
+      function renderAppointments() {
+        const upcoming = visibleAppointments[0];
+        carouselAppointments = visibleAppointments.slice(1);
+        document.getElementById("nextAppointmentDay").textContent = upcoming.day;
+        document.getElementById("nextAppointmentMonth").textContent = upcoming.month;
+        document.getElementById("nextAppointmentSpecialty").textContent = upcoming.specialty;
+        document.getElementById("nextAppointmentTime").textContent = upcoming.time;
+        document.getElementById("nextAppointmentProfessional").textContent = upcoming.professional;
+
+        if (carouselAppointments.length === 0) {
+          slide.innerHTML = '<div class="empty-appointments"><strong>No hay otros turnos en este período.</strong><p>Tu próximo turno está destacado a la derecha.</p></div>';
+          indicators.innerHTML = "";
+          previousButton.disabled = true;
+          nextButton.disabled = true;
+          return;
+        }
+
+        activeAppointment = Math.min(activeAppointment, carouselAppointments.length - 1);
+        const appointment = carouselAppointments[activeAppointment];
+        previousButton.disabled = false;
+        nextButton.disabled = false;
+        slide.innerHTML = `
+          <div class="appointment-icon" aria-hidden="true">✚</div>
+          <div class="appointment-details">
+            <span class="status">Confirmado</span>
+            <h3>${appointment.specialty}</h3>
+            <p><strong>Profesional:</strong> ${appointment.professional}</p>
+            <p><strong>Fecha:</strong> ${appointment.date}</p>
+            <p><strong>Horario:</strong> ${appointment.time}</p>
+            <p><strong>Sede:</strong> ${appointment.place}</p>
+          </div>`;
+        indicators.innerHTML = carouselAppointments.map((item, index) =>
+          `<button type="button" class="${index === activeAppointment ? "active" : ""}" data-index="${index}" aria-label="Ver turno de ${item.specialty}"></button>`
+        ).join("");
+      }
+
+      previousButton.addEventListener("click", () => {
+        if (carouselAppointments.length === 0) return;
+        activeAppointment = (activeAppointment - 1 + carouselAppointments.length) % carouselAppointments.length;
+        renderAppointments();
+      });
+      nextButton.addEventListener("click", () => {
+        if (carouselAppointments.length === 0) return;
+        activeAppointment = (activeAppointment + 1) % carouselAppointments.length;
+        renderAppointments();
+      });
+      indicators.addEventListener("click", (event) => {
+        if (event.target.dataset.index !== undefined) {
+          activeAppointment = Number(event.target.dataset.index);
+          renderAppointments();
+        }
+      });
+      document.getElementById("turnHorizon").addEventListener("change", (event) => {
+        visibleAppointments = appointments.filter(({ daysAhead }) => daysAhead <= Number(event.target.value));
+        if (visibleAppointments.length === 0) return;
+        activeAppointment = 0;
+        renderAppointments();
+      });
+      renderAppointments();
+    </script>
   </body>
 </html>

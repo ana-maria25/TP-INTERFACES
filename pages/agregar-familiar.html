@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Agregar familiar | TurnoSalud</title>
+    <link rel="stylesheet" href="../css/styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container nav-wrap">
+        <a class="brand" href="../index.html" aria-label="OesteSalud, inicio">
+          <span class="brand-mark" aria-hidden="true">+</span>
+          <span>Oeste<span class="brand-accent">Salud</span><small>INSTITUCIÓN MÉDICA</small></span>
+        </a>
+        <nav class="main-nav" aria-label="Navegación principal">
+          <a href="../index.html#servicios">Servicios</a>
+          <a href="../index.html#sedes">Nuestras sedes</a>
+          <a href="../index.html#nosotros">Quiénes somos</a>
+        </nav>
+        <div class="nav-actions logged-in-actions">
+          <span class="login-link">Hola, Ana María</span>
+          <a class="button button-small" href="../index.html">Cerrar sesión</a>
+        </div>
+      </div>
+    </header>
+
+    <main class="booking-container family-container">
+      <div class="booking-header">
+        <a href="panel-principal.html" class="back-link">← Volver al panel</a>
+        <h1>Mi familia</h1>
+        <p>Administrá las personas que pueden atenderse desde tu cuenta.</p>
+      </div>
+
+      <div class="family-workspace">
+        <aside class="family-overview">
+          <div class="family-overview-icon" aria-hidden="true">♡</div>
+          <h2>Personas vinculadas</h2>
+          <p>Los familiares que agregues aparecerán por nombre en el selector de paciente al solicitar un turno.</p>
+          <div id="familyList" class="family-list"></div>
+        </aside>
+
+        <section class="booking-form">
+          <h2>Agregar familiar</h2>
+          <p class="form-description">Completá sus datos tal como aparecen en su documento.</p>
+          <form id="familyForm">
+            <div class="family-form-grid">
+              <div class="form-group">
+                <label for="firstName">Nombre</label>
+                <input id="firstName" name="firstName" autocomplete="given-name" required />
+              </div>
+              <div class="form-group">
+                <label for="lastName">Apellido</label>
+                <input id="lastName" name="lastName" autocomplete="family-name" required />
+              </div>
+              <div class="form-group">
+                <label for="dni">DNI</label>
+                <input id="dni" name="dni" inputmode="numeric" pattern="[0-9. ]{7,12}" title="Ingresá un DNI válido" required />
+              </div>
+              <div class="form-group">
+                <label for="relationship">Vínculo</label>
+                <select id="relationship" name="relationship" required>
+                  <option value="">Seleccionar vínculo</option>
+                  <option>Hijo/a</option>
+                  <option>Pareja</option>
+                  <option>Madre/Padre</option>
+                  <option>Otro familiar</option>
+                </select>
+              </div>
+            </div>
+            <p class="family-message" id="familyMessage" role="status"></p>
+            <div class="form-buttons">
+              <a href="panel-principal.html" class="btn-cancel">Cancelar</a>
+              <button type="submit" class="btn-primary">Guardar familiar</button>
+            </div>
+          </form>
+        </section>
+      </div>
+    </main>
+
+    <footer>
+      <div class="container footer-inner">
+        <div>
+          <strong>OesteSalud | TurnoSalud</strong>
+          <p>Av. Rivadavia 13.850, Ramos Mejía · Zona Oeste</p>
+          <p>Atención: lunes a viernes de 8 a 20 hs · (011) 4658-2040</p>
+          <a href="mailto:contacto@oestesalud.com.ar">contacto@oestesalud.com.ar</a>
+        </div>
+        <small>© 2026 OesteSalud. Institución ficticia para el proyecto académico.</small>
+      </div>
+    </footer>
+
+    <script>
+      const familyStorageKey = "oestesalud-familia";
+      const familyForm = document.getElementById("familyForm");
+      const familyMessage = document.getElementById("familyMessage");
+      const familyList = document.getElementById("familyList");
+
+      function getFamilyMembers() {
+        return JSON.parse(localStorage.getItem(familyStorageKey) || "[]");
+      }
+
+      function renderFamilyMembers() {
+        familyList.replaceChildren();
+        const members = getFamilyMembers();
+        if (members.length === 0) {
+          const emptyMessage = document.createElement("p");
+          emptyMessage.className = "family-empty";
+          emptyMessage.textContent = "Todavía no agregaste familiares.";
+          familyList.appendChild(emptyMessage);
+          return;
+        }
+        members.forEach((member) => {
+          const item = document.createElement("article");
+          item.className = "family-record";
+          const name = document.createElement("strong");
+          name.textContent = member.fullName;
+          const detail = document.createElement("span");
+          detail.textContent = `${member.relationship} · DNI ${member.dni}`;
+          item.append(name, detail);
+          familyList.appendChild(item);
+        });
+      }
+
+      familyForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+        const formData = new FormData(familyForm);
+        const firstName = formData.get("firstName").trim();
+        const lastName = formData.get("lastName").trim();
+        const member = {
+          fullName: `${firstName} ${lastName}`,
+          dni: formData.get("dni").trim(),
+          relationship: formData.get("relationship"),
+        };
+        const members = getFamilyMembers();
+        if (members.some((item) => item.dni === member.dni)) {
+          familyMessage.textContent = "Ya agregaste a una persona con ese DNI.";
+          return;
+        }
+        try {
+          localStorage.setItem(familyStorageKey, JSON.stringify([...members, member]));
+          familyForm.reset();
+          familyMessage.textContent = `${member.fullName} ya está disponible para seleccionar al pedir un turno.`;
+          renderFamilyMembers();
+        } catch {
+          familyMessage.textContent = "No se pudo guardar el familiar en este navegador. Probá nuevamente.";
+        }
+      });
+
+      renderFamilyMembers();
+    </script>
+  </body>
+</html>

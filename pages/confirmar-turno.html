@@ -31,7 +31,7 @@
         </nav>
 
         <div class="nav-actions logged-in-actions">
-          <span class="login-link">Hola, María</span>
+          <span class="login-link">Hola, Ana María</span>
           <a class="button button-small" href="../index.html">Cerrar sesión</a>
         </div>
       </div>
@@ -82,7 +82,7 @@
 
           <div class="detail-row">
             <span>Paciente</span>
-            <strong>María González</strong>
+            <strong id="confirmationPatient">Ana María González</strong>
           </div>
 
           <div class="detail-row">
@@ -132,7 +132,7 @@
 
           <div class="detail-row">
             <span>Fecha</span>
-            <strong>Miércoles 18 de noviembre de 2026</strong>
+            <strong>Miércoles 25 de noviembre de 2026</strong>
           </div>
 
           <div class="detail-row">
@@ -183,6 +183,9 @@
 
     <!-- INTERACCIÓN DEL BOTÓN -->
     <script>
+        document.getElementById("confirmationPatient").textContent =
+          sessionStorage.getItem("oestesalud-paciente") || "Ana María González";
+
       const confirmButton = document.getElementById("confirmButton");
 
       confirmButton.addEventListener("click", function () {

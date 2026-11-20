@@ -31,7 +31,7 @@
         </nav>
 
         <div class="nav-actions logged-in-actions">
-          <span class="login-link">Hola, María</span>
+          <span class="login-link">Hola, Ana María</span>
           <a class="button button-small" href="../index.html">Cerrar sesión</a>
         </div>
       </div>
@@ -70,18 +70,15 @@
         <h2>Datos para tu consulta</h2>
 
         <p class="form-description">
-          Indicá para quién es el turno y seleccioná las opciones
-          correspondientes.
+          Elegí al paciente y completá los datos de la consulta.
         </p>
 
         <!-- SELECCIONAR PACIENTE -->
         <div class="form-group">
-          <label for="paciente">¿Para quién es el turno?</label>
+          <label for="paciente">Seleccionar paciente</label>
 
           <select id="paciente" name="paciente">
-            <option value="">Seleccionar paciente</option>
-            <option value="yo">Para mí - María González</option>
-            <option value="familiar">Para un familiar</option>
+            <option value="Ana María González">Ana María González</option>
           </select>
         </div>
 
@@ -149,5 +146,20 @@
         © 2026 OesteSalud | TurnoSalud. Todos los derechos reservados.
       </div>
     </footer>
+    <script>
+      const familyMembers = JSON.parse(localStorage.getItem("oestesalud-familia") || "[]");
+      const patientSelect = document.getElementById("paciente");
+
+      familyMembers.forEach((member) => {
+        const option = document.createElement("option");
+        option.value = member.fullName;
+        option.textContent = member.fullName;
+        patientSelect.appendChild(option);
+      });
+      patientSelect.value = sessionStorage.getItem("oestesalud-paciente") || "Ana María González";
+      patientSelect.addEventListener("change", () => {
+        sessionStorage.setItem("oestesalud-paciente", patientSelect.value);
+      });
+    </script>
   </body>
 </html>
