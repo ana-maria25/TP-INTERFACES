@@ -22,6 +22,7 @@ body {
   margin: 0;
   color: var(--ink);
   background: var(--white);
+
   font-family: "DM Sans", Arial, sans-serif;
 }
 a {
@@ -1585,7 +1586,9 @@ footer {
   font-size: 12px;
   font-weight: 700;
   cursor: pointer;
-  transition: background-color 0.2s, color 0.2s;
+  transition:
+    background-color 0.2s,
+    color 0.2s;
 }
 .available-days .day-option:hover,
 .time-option:hover span {
@@ -1838,7 +1841,6 @@ footer {
     align-items: flex-start;
     flex-direction: column;
   }
-
 }
 @media (max-width: 750px) {
   .search-summary {
