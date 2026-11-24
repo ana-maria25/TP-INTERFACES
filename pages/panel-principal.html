@@ -16,7 +16,11 @@
   <body>
     <header class="site-header">
       <div class="container nav-wrap">
-        <a class="brand" href="../index.html" aria-label="OesteSalud, inicio">
+        <a
+          class="brand"
+          href="panel-principal.html"
+          aria-label="OesteSalud, inicio"
+        >
           <span class="brand-mark" aria-hidden="true">+</span>
           <span
             >Oeste<span class="brand-accent">Salud</span
@@ -34,6 +38,27 @@
         </div>
       </div>
     </header>
+
+    <!-- MODAL DE CONFIRMACIÓN DE CANCELACIÓN -->
+    <div class="modal-overlay" id="cancelModal" hidden>
+      <div
+        class="modal-box"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="cancelModalTitle"
+      >
+        <h2 id="cancelModalTitle">¿Cancelar este turno?</h2>
+        <p id="cancelModalText">Esta acción no se puede deshacer.</p>
+        <div class="modal-actions">
+          <button type="button" class="btn-cancel" id="cancelModalNo">
+            Volver
+          </button>
+          <button type="button" class="btn-primary" id="cancelModalYes">
+            Sí, cancelar
+          </button>
+        </div>
+      </div>
+    </div>
 
     <!-- CONTENIDO PRINCIPAL -->
     <main class="dashboard">
@@ -58,8 +83,9 @@
               >
             </div>
             <select id="turnHorizon">
-              <option value="7">1 semana</option>
-              <option value="14">2 semanas</option>
+              <option value="all">Todos los turnos</option>
+              <option value="7">Próximos 7 días</option>
+              <option value="30">Próximos 30 días</option>
             </select>
           </div>
           <div class="appointment-carousel" aria-live="polite">
@@ -98,9 +124,7 @@
           <p id="nextAppointmentTime"></p>
           <p id="nextAppointmentProfessional">Solicitá tu primer turno</p>
           <p id="nextAppointmentPatient"></p>
-          <!-- NUEVO -->
           <p id="nextAppointmentPlace"></p>
-          <!-- NUEVO -->
           <span class="status">Confirmado</span>
         </aside>
       </section>
@@ -144,7 +168,7 @@
         <div class="info-card">
           <h3>¿Necesitás ayuda?</h3>
           <p>Estamos para ayudarte con tus gestiones en TurnoSalud.</p>
-          <a href="#">Centro de ayuda →</a>
+          <a href="centro-ayuda.html">Centro de ayuda →</a>
         </div>
       </section>
     </main>
@@ -185,14 +209,16 @@
         if (firstNameSpan) firstNameSpan.textContent = firstName;
       }
 
-      // 4. Turnos reales desde localStorage
+      // 4. Turnos reales desde localStorage (solo activos)
       const allTurnos = JSON.parse(
         localStorage.getItem("oestesalud-turnos") || "[]",
       );
 
-      // Filtrar solo los del usuario logueado
+      // Filtrar solo los del usuario logueado y que NO estén cancelados
       const userTurnos = activeUser
-        ? allTurnos.filter((t) => t.userDni === activeUser.dni)
+        ? allTurnos.filter(
+            (t) => t.userDni === activeUser.dni && t.status !== "cancelled",
+          )
         : [];
 
       // Calcular días que faltan desde hoy
@@ -226,13 +252,11 @@
 
       // Render principal
       function renderAppointments() {
-        // Si no hay turnos → estado vacío
         if (sortedTurnos.length === 0) {
           renderEmptyState();
           return;
         }
 
-        // Turno más próximo (siempre, aunque esté fuera del filtro)
         const upcoming = sortedTurnos[0];
 
         document.getElementById("nextAppointmentDay").textContent =
@@ -250,15 +274,24 @@
         document.getElementById("nextAppointmentPlace").textContent =
           upcoming.place ? `Sede: ${upcoming.place}` : "";
 
-        // Resto de turnos (sin el próximo), filtrados por horizonte
-        const horizon = Number(turnHorizonSelect.value) || 7;
-        const rest = sortedTurnos.slice(1);
-        visibleAppointments = rest.filter((t) => daysUntil(t.date) <= horizon);
+        // Filtro por horizonte
+        const horizonValue = turnHorizonSelect.value;
+        let filteredTurnos;
 
-        // Si no hay "otros" turnos en el período
+        if (horizonValue === "all") {
+          filteredTurnos = sortedTurnos;
+        } else {
+          const horizon = Number(horizonValue);
+          filteredTurnos = sortedTurnos.filter(
+            (t) => daysUntil(t.date) <= horizon,
+          );
+        }
+
+        visibleAppointments = filteredTurnos;
+
         if (visibleAppointments.length === 0) {
           slide.innerHTML =
-            '<div class="empty-appointments"><strong>No hay otros turnos en este período.</strong><p>Tu próximo turno está destacado a la derecha.</p></div>';
+            '<div class="empty-appointments"><strong>No hay turnos en este período.</strong><p>Probá con otro rango o solicitá un nuevo turno.</p></div>';
           indicators.innerHTML = "";
           previousButton.disabled = true;
           nextButton.disabled = true;
@@ -285,6 +318,9 @@
             <p><strong>Fecha:</strong> ${formatLongDate(appointment.date)}</p>
             <p><strong>Horario:</strong> ${appointment.time || "—"} hs</p>
             <p><strong>Sede:</strong> ${appointment.place || "—"}</p>
+            <button type="button" class="btn-cancel-turn" data-cancel-id="${appointment.id}">
+              Cancelar turno
+            </button>
           </div>`;
 
         indicators.innerHTML = carouselAppointments
@@ -304,8 +340,8 @@
         document.getElementById("nextAppointmentTime").textContent = "";
         document.getElementById("nextAppointmentProfessional").textContent =
           "Solicitá tu primer turno";
-          document.getElementById("nextAppointmentPatient").textContent = "";
-document.getElementById("nextAppointmentPlace").textContent = "";
+        document.getElementById("nextAppointmentPatient").textContent = "";
+        document.getElementById("nextAppointmentPlace").textContent = "";
 
         slide.innerHTML =
           '<div class="empty-appointments"><strong>No tenés turnos guardados.</strong><p>Cuando solicites un turno, va a aparecer acá.</p></div>';
@@ -392,9 +428,64 @@ document.getElementById("nextAppointmentPlace").textContent = "";
         renderAppointments();
       });
 
+      // ========================================
+      // CANCELACIÓN DE TURNOS
+      // ========================================
+      const cancelModal = document.getElementById("cancelModal");
+      const cancelModalText = document.getElementById("cancelModalText");
+      const cancelModalYes = document.getElementById("cancelModalYes");
+      const cancelModalNo = document.getElementById("cancelModalNo");
+
+      let turnToCancel = null;
+
+      function openCancelModal(turno) {
+        if (!turno) return;
+        turnToCancel = turno;
+        cancelModalText.textContent = `¿Cancelar el turno de ${turno.service} con ${turno.professional} el ${formatLongDate(turno.date)} a las ${turno.time} hs?`;
+        cancelModal.hidden = false;
+      }
+
+      function closeCancelModal() {
+        cancelModal.hidden = true;
+        turnToCancel = null;
+      }
+
+      function cancelTurn() {
+        if (!turnToCancel) return;
+
+        const all = JSON.parse(
+          localStorage.getItem("oestesalud-turnos") || "[]",
+        );
+
+        const updated = all.map((t) =>
+          t.id === turnToCancel.id ? { ...t, status: "cancelled" } : t,
+        );
+
+        localStorage.setItem("oestesalud-turnos", JSON.stringify(updated));
+
+        closeCancelModal();
+        window.location.reload();
+      }
+
+      cancelModalYes.addEventListener("click", cancelTurn);
+      cancelModalNo.addEventListener("click", closeCancelModal);
+      cancelModal.addEventListener("click", (e) => {
+        if (e.target === cancelModal) closeCancelModal();
+      });
+
+      // Delegación para los botones del carousel
+      slide.addEventListener("click", (e) => {
+        const btn = e.target.closest("[data-cancel-id]");
+        if (!btn) return;
+        const id = btn.dataset.cancelId;
+        const turno = sortedTurnos.find((t) => t.id === id);
+        openCancelModal(turno);
+      });
+
+      // Render inicial
       renderAppointments();
 
-      // 5. Cerrar sesión: limpia la sesión y vuelve al inicio
+      // 5. Cerrar sesión
       const logoutLink = document.getElementById("logoutLink");
       if (logoutLink) {
         logoutLink.addEventListener("click", () => {

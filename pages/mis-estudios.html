@@ -15,7 +15,11 @@
   <body>
     <header class="site-header">
       <div class="container nav-wrap">
-        <a class="brand" href="../index.html" aria-label="OesteSalud, inicio">
+        <a
+          class="brand"
+          href="panel-principal.html"
+          aria-label="OesteSalud, inicio"
+        >
           <span class="brand-mark" aria-hidden="true">+</span>
           <span
             >Oeste<span class="brand-accent">Salud</span
@@ -24,7 +28,9 @@
         </a>
 
         <div class="nav-actions logged-in-actions">
-          <a class="login-link" href="mi-perfil.html" id="profileLink">Mi perfil</a>
+          <a class="login-link" href="mi-perfil.html" id="profileLink"
+            >Mi perfil</a
+          >
           <a class="button button-small" href="../index.html" id="logoutLink"
             >Cerrar sesión</a
           >
@@ -40,25 +46,24 @@
       </div>
 
       <section class="study-list" aria-label="Estudios médicos">
+        <!-- ESTUDIO 1: Análisis de sangre -->
         <article class="study-card">
           <div class="study-card-heading">
             <div class="study-icon" aria-hidden="true">▤</div>
             <div>
               <p class="study-date">12 de noviembre de 2026 · Laboratorio</p>
-              <h2>Hemograma completo</h2>
+              <h2>Análisis de sangre</h2>
             </div>
             <span class="status">Disponible</span>
           </div>
           <details class="study-result">
             <summary>Ver resultado</summary>
-            <p>
-              Resultado listo para consultar. Para el proyecto, este detalle
-              representa el informe del estudio.
-            </p>
+            <p>Informe médico disponible para consulta.</p>
             <p><strong>Sede:</strong> OesteSalud - San Justo</p>
           </details>
         </article>
 
+        <!-- ESTUDIO 2: Radiografía de tórax -->
         <article class="study-card">
           <div class="study-card-heading">
             <div class="study-icon" aria-hidden="true">▤</div>
@@ -77,12 +82,13 @@
           </details>
         </article>
 
+        <!-- ESTUDIO 3: Ecografía abdominal (en proceso) -->
         <article class="study-card">
           <div class="study-card-heading">
             <div class="study-icon study-pending" aria-hidden="true">◷</div>
             <div>
-              <p class="study-date">18 de noviembre de 2026 · Laboratorio</p>
-              <h2>Perfil lipídico</h2>
+              <p class="study-date">18 de noviembre de 2026 · Ecografía</p>
+              <h2>Ecografía abdominal</h2>
             </div>
             <span class="study-status-pending">En proceso</span>
           </div>

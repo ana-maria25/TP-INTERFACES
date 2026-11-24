@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Centro de ayuda | TurnoSalud</title>
+    <link rel="stylesheet" href="../css/styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <header class="site-header">
+      <div class="container nav-wrap">
+        <a
+          class="brand"
+          href="panel-principal.html"
+          aria-label="OesteSalud, inicio"
+        >
+          <span class="brand-mark" aria-hidden="true">+</span>
+          <span
+            >Oeste<span class="brand-accent">Salud</span
+            ><small>INSTITUCIÓN MÉDICA</small></span
+          >
+        </a>
+
+        <div class="nav-actions logged-in-actions">
+          <a class="login-link" href="mi-perfil.html" id="profileLink"
+            >Mi perfil</a
+          >
+          <a class="button button-small" href="../index.html" id="logoutLink"
+            >Cerrar sesión</a
+          >
+        </div>
+      </div>
+    </header>
+
+    <main class="booking-container help-container">
+      <div class="booking-header">
+        <a href="panel-principal.html" class="back-link">← Volver al panel</a>
+        <h1>Centro de ayuda</h1>
+        <p>
+          Encontrá respuestas y contactate con nosotros si necesitás asistencia.
+        </p>
+      </div>
+
+      <!-- GUÍA RÁPIDA -->
+      <section class="help-section">
+        <h2>¿Cómo saco un turno?</h2>
+        <div class="help-steps">
+          <div class="help-step">
+            <span class="help-step-number">1</span>
+            <div>
+              <h3>Elegí paciente y cobertura</h3>
+              <p>
+                Seleccioná para quién es el turno (vos o un familiar) y tu
+                cobertura médica.
+              </p>
+            </div>
+          </div>
+          <div class="help-step">
+            <span class="help-step-number">2</span>
+            <div>
+              <h3>Elegí especialidad o estudio</h3>
+              <p>
+                Seleccioná la especialidad médica o el estudio que necesitás, y
+                la sede.
+              </p>
+            </div>
+          </div>
+          <div class="help-step">
+            <span class="help-step-number">3</span>
+            <div>
+              <h3>Elegí profesional, día y horario</h3>
+              <p>Revisá los profesionales disponibles y confirmá tu turno.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PREGUNTAS FRECUENTES -->
+      <section class="help-section">
+        <h2>Preguntas frecuentes</h2>
+        <div class="faq-list">
+          <details class="faq-item">
+            <summary>¿Cómo solicito un turno?</summary>
+            <p>
+              Ingresá a tu panel, tocá "Solicitar turno" y seguí los pasos:
+              elegí paciente, cobertura, especialidad o estudio, sede,
+              profesional, día y horario. Al confirmar, el turno queda
+              reservado.
+            </p>
+          </details>
+
+          <details class="faq-item">
+            <summary>¿Puedo sacar turno para un familiar?</summary>
+            <p>
+              Sí. Primero vinculá a tu familiar desde "Mi familia". Después, al
+              solicitar un turno, elegilo en el selector de paciente. El turno
+              aparecerá en tu panel.
+            </p>
+          </details>
+
+          <details class="faq-item">
+            <summary>¿Cómo cancelo un turno?</summary>
+            <p>
+              Desde tu panel, en la sección de turnos próximos, tocá "Cancelar
+              turno" en el turno que quieras cancelar. Se te pedirá
+              confirmación.
+            </p>
+          </details>
+
+          <details class="faq-item">
+            <summary>¿Dónde consulto mis estudios?</summary>
+            <p>
+              En tu panel, ingresá a "Mis estudios". Ahí vas a ver los estudios
+              disponibles para consultar y los que están en proceso.
+            </p>
+          </details>
+
+          <details class="faq-item">
+            <summary>¿Qué pasa si no hay turnos disponibles?</summary>
+            <p>
+              Si no hay turnos para la combinación de especialidad y sede
+              elegida, vas a ver un mensaje de alerta. Probá con otra sede o
+              especialidad, o consultanos por teléfono.
+            </p>
+          </details>
+
+          <details class="faq-item">
+            <summary>¿Puedo cambiar mi contraseña?</summary>
+            <p>
+              Por ahora la contraseña se define al crear la cuenta. Si necesitás
+              cambiarla, contactanos por email o teléfono.
+            </p>
+          </details>
+        </div>
+      </section>
+
+      <!-- COBERTURAS ACEPTADAS -->
+      <section class="help-section">
+        <h2>Coberturas que aceptamos</h2>
+        <p class="help-section-description">
+          Trabajamos con las principales obras sociales y prepagas. Consultá tu
+          caso particular al solicitar un turno.
+        </p>
+        <div class="coverage-grid">
+          <div class="coverage-card">OSDE</div>
+          <div class="coverage-card">Swiss Medical</div>
+          <div class="coverage-card">Galeno</div>
+          <div class="coverage-card">IOMA</div>
+          <div class="coverage-card">PAMI</div>
+          <div class="coverage-card">Medicus</div>
+          <div class="coverage-card">OMINT</div>
+          <div class="coverage-card">Particular</div>
+        </div>
+      </section>
+
+      <!-- CONTACTO -->
+      <section class="help-section">
+        <h2>Contacto</h2>
+        <div class="contact-grid">
+          <div class="contact-card">
+            <span class="contact-icon" aria-hidden="true">☎</span>
+            <h3>Teléfono</h3>
+            <p>(011) 4658-2040</p>
+            <small>Lunes a viernes de 8 a 20 hs</small>
+          </div>
+          <div class="contact-card">
+            <span class="contact-icon" aria-hidden="true">✉</span>
+            <h3>Email</h3>
+            <p>contacto@oestesalud.com.ar</p>
+            <small>Respondemos en 24-48 hs</small>
+          </div>
+          <div class="contact-card">
+            <span class="contact-icon" aria-hidden="true">⌂</span>
+            <h3>Dirección</h3>
+            <p>Av. Rivadavia 13.850</p>
+            <small>Ramos Mejía · Zona Oeste</small>
+          </div>
+        </div>
+      </section>
+
+      <!-- FORMULARIO DE CONTACTO -->
+      <section class="help-section">
+        <h2>Escribinos</h2>
+        <p class="help-section-description">
+          Completá el formulario y te respondemos a la brevedad.
+        </p>
+
+        <form id="contactForm" class="booking-form help-form" novalidate>
+          <div class="family-form-grid">
+            <div class="form-group">
+              <label for="contactName">Nombre</label>
+              <input id="contactName" name="contactName" required />
+            </div>
+            <div class="form-group">
+              <label for="contactEmail">Email</label>
+              <input
+                id="contactEmail"
+                name="contactEmail"
+                type="email"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="contactMessage">Mensaje</label>
+            <textarea
+              id="contactMessage"
+              name="contactMessage"
+              rows="5"
+              required
+            ></textarea>
+          </div>
+
+          <p class="family-message" id="contactMessageStatus" role="status"></p>
+
+          <div class="form-buttons">
+            <button type="submit" class="btn-primary">Enviar mensaje</button>
+          </div>
+        </form>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container footer-inner">
+        <div>
+          <strong>OesteSalud | TurnoSalud</strong>
+          <p>Av. Rivadavia 13.850, Ramos Mejía · Zona Oeste</p>
+          <p>Atención: lunes a viernes de 8 a 20 hs · (011) 4658-2040</p>
+          <a href="mailto:contacto@oestesalud.com.ar"
+            >contacto@oestesalud.com.ar</a
+          >
+        </div>
+        <small
+          >© 2026 OesteSalud. Institución ficticia para el proyecto
+          académico.</small
+        >
+      </div>
+    </footer>
+
+    <script>
+      // Logout
+      const logoutLink = document.getElementById("logoutLink");
+      if (logoutLink) {
+        logoutLink.addEventListener("click", () => {
+          sessionStorage.removeItem("oestesalud-usuario-activo");
+        });
+      }
+
+      // Formulario de contacto (simulado)
+      const contactForm = document.getElementById("contactForm");
+      const contactMessageStatus = document.getElementById(
+        "contactMessageStatus",
+      );
+
+      contactForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+
+        const name = document.getElementById("contactName").value.trim();
+        const email = document.getElementById("contactEmail").value.trim();
+        const message = document.getElementById("contactMessage").value.trim();
+
+        if (!name || !email || !message) {
+          contactMessageStatus.textContent = "Completá todos los campos.";
+          return;
+        }
+
+        // Simular envío
+        contactMessageStatus.textContent =
+          "¡Gracias por escribirnos! Tu mensaje fue enviado. Te responderemos a la brevedad.";
+        contactForm.reset();
+      });
+    </script>
+  </body>
+</html>
