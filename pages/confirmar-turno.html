@@ -24,20 +24,15 @@
           >
         </a>
 
-        <nav class="main-nav" aria-label="Navegación principal">
-          <a href="../index.html#servicios">Servicios</a>
-          <a href="../index.html#sedes">Nuestras sedes</a>
-          <a href="../index.html#nosotros">Quiénes somos</a>
-        </nav>
-
         <div class="nav-actions logged-in-actions">
-          <span class="login-link">Hola, Ana María</span>
-          <a class="button button-small" href="../index.html">Cerrar sesión</a>
+          <a class="login-link" href="mi-perfil.html" id="profileLink">Mi perfil</a>
+          <a class="button button-small" href="../index.html" id="logoutLink"
+            >Cerrar sesión</a
+          >
         </div>
       </div>
     </header>
 
-    <!-- CONTENIDO PRINCIPAL -->
     <main class="confirmation-container">
       <div class="confirmation-header">
         <a href="profesionales-disponibilidad.html" class="back-link">
@@ -45,10 +40,7 @@
         </a>
 
         <h1>Confirmación del turno</h1>
-
-        <p>
-          Revisá que los datos sean correctos antes de confirmar tu reserva.
-        </p>
+        <p>Revisá que los datos sean correctos antes de confirmar tu reserva.</p>
       </div>
 
       <!-- INDICADOR DE PASOS -->
@@ -57,19 +49,17 @@
           <span>✓</span>
           <p>Datos del turno</p>
         </div>
-
         <div class="step completed">
           <span>✓</span>
           <p>Profesional y horario</p>
         </div>
-
         <div class="step active">
           <span>3</span>
           <p>Confirmación</p>
         </div>
       </div>
 
-      <!-- RESUMEN DEL TURNO -->
+      <!-- RESUMEN DEL TURNO (dinámico) -->
       <section class="confirmation-card" id="confirmationDetails">
         <div class="confirmation-card-header">
           <h2>Resumen de tu turno</h2>
@@ -79,65 +69,56 @@
         <!-- DATOS DEL PACIENTE -->
         <div class="confirmation-section">
           <h3>Datos del paciente</h3>
-
           <div class="detail-row">
             <span>Paciente</span>
-            <strong id="confirmationPatient">Ana María González</strong>
+            <strong id="confirmationPatient">—</strong>
           </div>
-
           <div class="detail-row">
             <span>DNI</span>
-            <strong>XX.XXX.XXX</strong>
+            <strong id="confirmationPatientDni">—</strong>
           </div>
         </div>
 
         <!-- COBERTURA -->
         <div class="confirmation-section">
           <h3>Cobertura médica</h3>
-
           <div class="detail-row">
             <span>Tipo de cobertura</span>
-            <strong>Obra social</strong>
+            <strong id="confirmationCoverage">—</strong>
           </div>
-
           <div class="detail-row">
-            <span>Prestación</span>
-            <strong>Clínica médica</strong>
+            <span id="confirmationServiceLabel">Prestación</span>
+            <strong id="confirmationService">—</strong>
           </div>
         </div>
 
         <!-- PROFESIONAL Y SEDE -->
         <div class="confirmation-section">
           <h3>Centro y profesional</h3>
-
           <div class="detail-row">
             <span>Centro de atención</span>
-            <strong>OesteSalud - San Justo</strong>
+            <strong id="confirmationPlace">—</strong>
           </div>
-
           <div class="detail-row">
             <span>Profesional</span>
-            <strong>Dra. Laura Fernández</strong>
+            <strong id="confirmationProfessional">—</strong>
           </div>
-
           <div class="detail-row">
-            <span>Especialidad</span>
-            <strong>Clínica médica</strong>
+            <span id="confirmationTypeLabel">Especialidad</span>
+            <strong id="confirmationType">—</strong>
           </div>
         </div>
 
         <!-- FECHA Y HORARIO -->
         <div class="confirmation-section">
           <h3>Fecha y horario</h3>
-
           <div class="detail-row">
             <span>Fecha</span>
-            <strong>Miércoles 25 de noviembre de 2026</strong>
+            <strong id="confirmationDate">—</strong>
           </div>
-
           <div class="detail-row">
             <span>Horario</span>
-            <strong>11:00 hs</strong>
+            <strong id="confirmationTime">—</strong>
           </div>
         </div>
 
@@ -146,7 +127,6 @@
           <a href="profesionales-disponibilidad.html" class="btn-cancel">
             Modificar datos
           </a>
-
           <button type="button" class="btn-primary" id="confirmButton">
             Confirmar turno
           </button>
@@ -156,47 +136,143 @@
       <!-- MENSAJE DE RESERVA EXITOSA -->
       <section class="success-message" id="successMessage" hidden>
         <div class="success-icon">✓</div>
-
         <h2>¡Tu turno fue confirmado!</h2>
-
         <p>La reserva se realizó correctamente. Te esperamos en OesteSalud.</p>
-
         <div class="success-details">
           <span>Número de reserva</span>
-          <strong>OS-2026-00125</strong>
+          <strong id="reservationNumber">—</strong>
         </div>
-
         <p class="success-note">
           Recordá presentarte unos minutos antes del horario asignado.
         </p>
-
-        <a href="panel-principal.html" class="btn-primary"> Ir a mi panel </a>
+        <a href="panel-principal.html" class="btn-primary" id="goToPanel">
+          Ir a mi panel
+        </a>
       </section>
     </main>
 
-    <!-- PIE DE PÁGINA -->
     <footer>
       <div class="container footer-inner">
         © 2026 OesteSalud | TurnoSalud. Todos los derechos reservados.
       </div>
     </footer>
 
-    <!-- INTERACCIÓN DEL BOTÓN -->
     <script>
-        document.getElementById("confirmationPatient").textContent =
-          sessionStorage.getItem("oestesalud-paciente") || "Ana María González";
+      // 1. Usuario logueado
+      const activeUser = JSON.parse(
+        sessionStorage.getItem("oestesalud-usuario-activo") || "null",
+      );
+      if (!activeUser) {
+        window.location.href = "iniciar-sesion.html";
+      }
 
+      // 2. Logout
+      const logoutLink = document.getElementById("logoutLink");
+      if (logoutLink) {
+        logoutLink.addEventListener("click", () => {
+          sessionStorage.removeItem("oestesalud-usuario-activo");
+        });
+      }
+
+      // 3. Leer solicitud y selección
+      const solicitud = JSON.parse(
+        sessionStorage.getItem("oestesalud-solicitud") || "null",
+      );
+      const seleccion = JSON.parse(
+        sessionStorage.getItem("oestesalud-seleccion") || "null",
+      );
+
+      // Si falta algo, volver al paso correspondiente
+      if (!solicitud) {
+        window.location.href = "solicitar-turno.html";
+      }
+      if (!seleccion) {
+        window.location.href = "profesionales-disponibilidad.html";
+      }
+
+      // 4. Formatear fecha ISO (YYYY-MM-DD) → "Miércoles 25 de noviembre de 2026"
+      function formatLongDate(iso) {
+        if (!iso) return "—";
+        const [year, month, day] = iso.split("-").map(Number);
+        const date = new Date(year, month - 1, day);
+        const days = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
+        const months = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"];
+        return `${days[date.getDay()]} ${day} de ${months[month - 1]} de ${year}`;
+      }
+
+      // 5. Pintar resumen
+      document.getElementById("confirmationPatient").textContent =
+        solicitud.patient || "—";
+      document.getElementById("confirmationPatientDni").textContent =
+        solicitud.patientDni || "—";
+      document.getElementById("confirmationCoverage").textContent =
+        solicitud.coverage || "—";
+      document.getElementById("confirmationService").textContent =
+        solicitud.service || "—";
+      document.getElementById("confirmationServiceLabel").textContent =
+        solicitud.type === "specialty" ? "Especialidad" : "Estudio";
+      document.getElementById("confirmationPlace").textContent =
+        seleccion.place || "—";
+      document.getElementById("confirmationProfessional").textContent =
+        seleccion.professionalName || "—";
+      document.getElementById("confirmationTypeLabel").textContent =
+        solicitud.type === "specialty" ? "Especialidad" : "Estudio";
+      document.getElementById("confirmationType").textContent =
+        solicitud.service || "—";
+      document.getElementById("confirmationDate").textContent =
+        formatLongDate(seleccion.date);
+      document.getElementById("confirmationTime").textContent =
+        seleccion.time ? `${seleccion.time} hs` : "—";
+
+      // 6. Generar número de reserva
+      function generateReservationNumber() {
+        const random = Math.floor(10000 + Math.random() * 90000);
+        return `OS-2026-${random}`;
+      }
+
+      // 7. Confirmar turno → guardar en localStorage
       const confirmButton = document.getElementById("confirmButton");
 
-      confirmButton.addEventListener("click", function () {
+      confirmButton.addEventListener("click", () => {
+        const reservationNumber = generateReservationNumber();
+
+        // Objeto del turno
+        const turno = {
+          id: reservationNumber,
+          userDni: activeUser.dni,
+          patient: solicitud.patient,
+          patientDni: solicitud.patientDni,
+          coverage: solicitud.coverage,
+          type: solicitud.type,
+          service: solicitud.service,
+          professional: seleccion.professionalName,
+          place: seleccion.place,
+          date: seleccion.date,
+          time: seleccion.time,
+          createdAt: new Date().toISOString(),
+        };
+
+        // Guardar en localStorage (array)
+        try {
+          const turnos = JSON.parse(
+            localStorage.getItem("oestesalud-turnos") || "[]",
+          );
+          turnos.push(turno);
+          localStorage.setItem("oestesalud-turnos", JSON.stringify(turnos));
+        } catch {
+          alert("No se pudo guardar el turno. Probá nuevamente.");
+          return;
+        }
+
+        // Mostrar éxito
         document.getElementById("confirmationDetails").hidden = true;
-
+        document.getElementById("reservationNumber").textContent = reservationNumber;
         document.getElementById("successMessage").hidden = false;
+        window.scrollTo({ top: 0, behavior: "smooth" });
 
-        window.scrollTo({
-          top: 0,
-          behavior: "smooth",
-        });
+        // Limpiar solicitud y selección (ya no se necesitan)
+        sessionStorage.removeItem("oestesalud-solicitud");
+        sessionStorage.removeItem("oestesalud-seleccion");
       });
     </script>
   </body>

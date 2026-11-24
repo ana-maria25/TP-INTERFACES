@@ -24,48 +24,40 @@
           >
         </a>
 
-        <nav class="main-nav" aria-label="Navegación principal">
-          <a href="../index.html#servicios">Servicios</a>
-          <a href="../index.html#sedes">Nuestras sedes</a>
-          <a href="../index.html#nosotros">Quiénes somos</a>
-        </nav>
-
         <div class="nav-actions logged-in-actions">
-          <span class="login-link">Hola, Ana María</span>
-          <a class="button button-small" href="../index.html">Cerrar sesión</a>
+          <a class="login-link" href="mi-perfil.html" id="profileLink"
+            >Mi perfil</a
+          >
+          <a class="button button-small" href="../index.html" id="logoutLink"
+            >Cerrar sesión</a
+          >
         </div>
       </div>
     </header>
 
-    <!-- CONTENIDO PRINCIPAL -->
     <main class="availability-container">
       <div class="availability-header">
         <a href="solicitar-turno.html" class="back-link">
           ← Volver a los datos del turno
         </a>
-
         <h1>Profesionales disponibles</h1>
-
         <p>Elegí el profesional y el horario que mejor se adapte a vos.</p>
       </div>
 
-      <!-- RESUMEN DE LA BÚSQUEDA -->
+      <!-- RESUMEN DE LA BÚSQUEDA (dinámico) -->
       <section class="search-summary">
         <div>
-          <span>Especialidad</span>
-          <strong>Clínica médica</strong>
+          <span id="summaryTypeLabel">Especialidad</span>
+          <strong id="summaryService">—</strong>
         </div>
-
         <div>
           <span>Sede</span>
-          <strong>San Justo</strong>
+          <strong id="summaryPlace">—</strong>
         </div>
-
         <div>
           <span>Cobertura</span>
-          <strong>Obra social</strong>
+          <strong id="summaryCoverage">—</strong>
         </div>
-
         <a href="solicitar-turno.html">Modificar búsqueda</a>
       </section>
 
@@ -75,183 +67,452 @@
           <span>✓</span>
           <p>Datos del turno</p>
         </div>
-
         <div class="step active">
           <span>2</span>
           <p>Profesional y horario</p>
         </div>
-
         <div class="step">
           <span>3</span>
           <p>Confirmación</p>
         </div>
       </div>
 
-      <!-- LISTADO DE PROFESIONALES -->
+      <!-- LISTADO DE PROFESIONALES (dinámico) -->
       <section class="professionals-section">
         <h2>Seleccioná un profesional</h2>
-
-        <p class="availability-description">
+        <p class="availability-description" id="availabilityDescription">
           Estos son los profesionales que tienen disponibilidad para la
           especialidad y sede seleccionadas.
         </p>
 
-        <!-- PROFESIONAL 1 -->
-        <article class="professional-card">
-          <div class="doctor-info">
-            <div class="doctor-avatar">LF</div>
+        <div id="professionalsList"></div>
 
-            <div>
-              <h3>Dra. Laura Fernández</h3>
-              <p>Clínica médica</p>
-              <span class="doctor-location">Sede San Justo</span>
-            </div>
-          </div>
-
-          <div class="doctor-availability">
-            <h4>Días disponibles</h4>
-
-            <div class="available-days">
-              <button type="button" class="day-option" aria-pressed="false">Mar 24/11</button>
-              <button type="button" class="day-option" aria-pressed="false">Mié 25/11</button>
-              <button type="button" class="day-option" aria-pressed="false">Vie 27/11</button>
-            </div>
-
-            <h4>Horarios disponibles</h4>
-
-            <div class="available-times">
-              <label class="time-option">
-                <input type="radio" name="horario" value="24-11-09:00" />
-                <span>09:00</span>
-              </label>
-
-              <label class="time-option">
-                <input type="radio" name="horario" value="24-11-10:30" />
-                <span>10:30</span>
-              </label>
-
-              <label class="time-option">
-                <input type="radio" name="horario" value="25-11-11:00" />
-                <span>11:00</span>
-              </label>
-
-              <label class="time-option">
-                <input type="radio" name="horario" value="27-11-14:00" />
-                <span>14:00</span>
-              </label>
-            </div>
-          </div>
-        </article>
-
-        <!-- PROFESIONAL 2 -->
-        <article class="professional-card">
-          <div class="doctor-info">
-            <div class="doctor-avatar">RM</div>
-
-            <div>
-              <h3>Dr. Ricardo Martínez</h3>
-              <p>Clínica médica</p>
-              <span class="doctor-location">Sede San Justo</span>
-            </div>
-          </div>
-
-          <div class="doctor-availability">
-            <h4>Días disponibles</h4>
-
-            <div class="available-days">
-              <button type="button" class="day-option" aria-pressed="false">Jue 26/11</button>
-              <button type="button" class="day-option" aria-pressed="false">Vie 27/11</button>
-            </div>
-
-            <h4>Horarios disponibles</h4>
-
-            <div class="available-times">
-              <label class="time-option">
-                <input type="radio" name="horario" value="26-11-08:30" />
-                <span>08:30</span>
-              </label>
-
-              <label class="time-option">
-                <input type="radio" name="horario" value="26-11-09:30" />
-                <span>09:30</span>
-              </label>
-
-              <label class="time-option">
-                <input type="radio" name="horario" value="27-11-12:00" />
-                <span>12:00</span>
-              </label>
-            </div>
-          </div>
-        </article>
-
-        <!-- PROFESIONAL 3 -->
-        <article class="professional-card">
-          <div class="doctor-info">
-            <div class="doctor-avatar">SG</div>
-
-            <div>
-              <h3>Dra. Sofía Gómez</h3>
-              <p>Clínica médica</p>
-              <span class="doctor-location">Sede San Justo</span>
-            </div>
-          </div>
-
-          <div class="doctor-availability">
-            <h4>Días disponibles</h4>
-
-            <div class="available-days">
-              <button type="button" class="day-option" aria-pressed="false">Mié 25/11</button>
-              <button type="button" class="day-option" aria-pressed="false">Vie 27/11</button>
-            </div>
-
-            <h4>Horarios disponibles</h4>
-
-            <div class="available-times">
-              <label class="time-option">
-                <input type="radio" name="horario" value="25-11-15:00" />
-                <span>15:00</span>
-              </label>
-
-              <label class="time-option">
-                <input type="radio" name="horario" value="25-11-16:00" />
-                <span>16:00</span>
-              </label>
-
-              <label class="time-option">
-                <input type="radio" name="horario" value="27-11-10:00" />
-                <span>10:00</span>
-              </label>
-            </div>
-          </div>
-        </article>
+        <!-- MENSAJE DE ERROR / SIN DISPONIBILIDAD -->
+        <div class="login-error" id="availabilityError" role="alert" hidden>
+          <span class="login-error-icon" aria-hidden="true">!</span>
+          <p>
+            No hay turnos disponibles para la combinación seleccionada. Probá
+            con otra sede o especialidad.
+          </p>
+        </div>
 
         <!-- BOTONES -->
         <div class="availability-buttons">
           <a href="solicitar-turno.html" class="btn-cancel"> Volver </a>
-
-          <a href="confirmar-turno.html" class="btn-primary"> Continuar → </a>
+          <button type="button" class="btn-primary" id="continueButton">
+            Continuar →
+          </button>
         </div>
       </section>
     </main>
 
-    <script>
-      document.querySelectorAll(".professional-card").forEach((card) => {
-        card.querySelector(".available-days").addEventListener("click", (event) => {
-          const button = event.target.closest(".day-option");
-          if (!button) return;
-          card.querySelectorAll(".day-option").forEach((day) => {
-            day.classList.toggle("selected", day === button);
-            day.setAttribute("aria-pressed", String(day === button));
-          });
-        });
-      });
-    </script>
-
-    <!-- PIE DE PÁGINA -->
     <footer>
       <div class="container footer-inner">
         © 2026 OesteSalud | TurnoSalud. Todos los derechos reservados.
       </div>
     </footer>
+
+    <script>
+      // 1. Leer usuario logueado
+      const activeUser = JSON.parse(
+        sessionStorage.getItem("oestesalud-usuario-activo") || "null",
+      );
+      if (!activeUser) {
+        window.location.href = "iniciar-sesion.html";
+      }
+
+      // 2. Logout
+      const logoutLink = document.getElementById("logoutLink");
+      if (logoutLink) {
+        logoutLink.addEventListener("click", () => {
+          sessionStorage.removeItem("oestesalud-usuario-activo");
+        });
+      }
+
+      // 3. Leer la solicitud guardada
+      const solicitud = JSON.parse(
+        sessionStorage.getItem("oestesalud-solicitud") || "null",
+      );
+      if (!solicitud) {
+        window.location.href = "solicitar-turno.html";
+      }
+
+      // 4. Pintar resumen de búsqueda
+      document.getElementById("summaryTypeLabel").textContent =
+        solicitud.type === "specialty" ? "Especialidad" : "Estudio";
+      document.getElementById("summaryService").textContent =
+        solicitud.service || "—";
+      document.getElementById("summaryPlace").textContent =
+        solicitud.placeLabel || "—";
+      document.getElementById("summaryCoverage").textContent =
+        solicitud.coverage || "—";
+
+      // 5. Catálogo de profesionales (simulado)
+      // Cada profesional atiende una especialidad o estudio, en una sede, con horarios base.
+      const PROFESSIONALS = [
+        // ===== ESPECIALIDADES =====
+        // Clínica médica
+        {
+          id: 1,
+          name: "Dra. Laura Fernández",
+          type: "specialty",
+          service: "Clínica médica",
+          place: "San Justo",
+          slots: ["09:00", "10:30", "14:00"],
+        },
+        {
+          id: 2,
+          name: "Dr. Ricardo Martínez",
+          type: "specialty",
+          service: "Clínica médica",
+          place: "San Justo",
+          slots: ["08:30", "09:30", "12:00"],
+        },
+        {
+          id: 3,
+          name: "Dra. Sofía Gómez",
+          type: "specialty",
+          service: "Clínica médica",
+          place: "Ramos Mejía",
+          slots: ["15:00", "16:00"],
+        },
+
+        // Cardiología
+        {
+          id: 4,
+          name: "Dr. Pablo Ruiz",
+          type: "specialty",
+          service: "Cardiología",
+          place: "San Justo",
+          slots: ["09:00", "11:00"],
+        },
+        {
+          id: 5,
+          name: "Dra. Carolina Pérez",
+          type: "specialty",
+          service: "Cardiología",
+          place: "Ramos Mejía",
+          slots: ["10:00", "15:30"],
+        },
+        {
+          id: 6,
+          name: "Dr. Hernán López",
+          type: "specialty",
+          service: "Cardiología",
+          place: "Morón",
+          slots: ["08:00", "13:00"],
+        },
+
+        // Ginecología
+        {
+          id: 7,
+          name: "Dra. Marina Sosa",
+          type: "specialty",
+          service: "Ginecología",
+          place: "San Justo",
+          slots: ["09:30", "11:30"],
+        },
+        {
+          id: 8,
+          name: "Dra. Valeria Ortiz",
+          type: "specialty",
+          service: "Ginecología",
+          place: "Morón",
+          slots: ["14:00", "16:30"],
+        },
+
+        // Traumatología
+        {
+          id: 9,
+          name: "Dr. Alejandro Díaz",
+          type: "specialty",
+          service: "Traumatología",
+          place: "San Justo",
+          slots: ["08:00", "10:00", "12:30"],
+        },
+        {
+          id: 10,
+          name: "Dra. Lucía Romero",
+          type: "specialty",
+          service: "Traumatología",
+          place: "Laferrere",
+          slots: ["09:00", "15:00"],
+        },
+
+        // ===== ESTUDIOS =====
+        // Análisis de sangre
+        {
+          id: 11,
+          name: "Lic. Mariana Torres",
+          type: "study",
+          service: "Análisis de sangre",
+          place: "San Justo",
+          slots: ["07:30", "08:30", "09:30"],
+        },
+        {
+          id: 12,
+          name: "Lic. Diego Herrera",
+          type: "study",
+          service: "Análisis de sangre",
+          place: "Ramos Mejía",
+          slots: ["07:00", "08:00"],
+        },
+
+        // Ecografía abdominal
+        {
+          id: 13,
+          name: "Dr. Federico Gómez",
+          type: "study",
+          service: "Ecografía abdominal",
+          place: "San Justo",
+          slots: ["10:00", "11:30"],
+        },
+        {
+          id: 14,
+          name: "Dra. Paula Benítez",
+          type: "study",
+          service: "Ecografía abdominal",
+          place: "Morón",
+          slots: ["09:00", "14:30"],
+        },
+
+        // Ecografía de partes blandas
+        {
+          id: 15,
+          name: "Dr. Martín Aguirre",
+          type: "study",
+          service: "Ecografía de partes blandas",
+          place: "Ramos Mejía",
+          slots: ["11:00", "16:00"],
+        },
+        {
+          id: 16,
+          name: "Dra. Cecilia Ríos",
+          type: "study",
+          service: "Ecografía de partes blandas",
+          place: "Laferrere",
+          slots: ["08:30", "12:30"],
+        },
+
+        // Radiografía de tórax
+        {
+          id: 17,
+          name: "Tec. Nicolás Vega",
+          type: "study",
+          service: "Radiografía de tórax",
+          place: "San Justo",
+          slots: ["09:00", "10:00", "11:00"],
+        },
+        {
+          id: 18,
+          name: "Tec. Andrea Molina",
+          type: "study",
+          service: "Radiografía de tórax",
+          place: "Morón",
+          slots: ["08:00", "13:00"],
+        },
+
+        // Chequeo ginecológico integral
+        {
+          id: 19,
+          name: "Dra. Florencia Castro",
+          type: "study",
+          service: "Chequeo ginecológico integral",
+          place: "San Justo",
+          slots: ["09:00", "11:00"],
+        },
+        {
+          id: 20,
+          name: "Dra. Romina Paz",
+          type: "study",
+          service: "Chequeo ginecológico integral",
+          place: "Ramos Mejía",
+          slots: ["10:30", "15:00"],
+        },
+      ];
+
+      // 6. Filtrar profesionales según la solicitud
+      function filterProfessionals() {
+        return PROFESSIONALS.filter((p) => {
+          // Filtro por tipo (especialidad o estudio) y nombre del servicio
+          if (p.type !== solicitud.type) return false;
+          if (p.service !== solicitud.service) return false;
+          // Filtro por sede (si eligió "Todos los centros", mostramos todas)
+          if (solicitud.place !== "all" && p.place !== solicitud.place)
+            return false;
+          return true;
+        });
+      }
+
+      // 7. Generar los próximos N días hábiles desde hoy (excluye sábados y domingos)
+      function getNextAvailableDays(count) {
+        const days = [];
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        let cursor = new Date(today);
+        cursor.setDate(cursor.getDate() + 1); // empezamos mañana
+
+        const dayNames = ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"];
+        const monthNames = [
+          "ene",
+          "feb",
+          "mar",
+          "abr",
+          "may",
+          "jun",
+          "jul",
+          "ago",
+          "sep",
+          "oct",
+          "nov",
+          "dic",
+        ];
+
+        while (days.length < count) {
+          const dayOfWeek = cursor.getDay();
+          // 0 = domingo, 6 = sábado
+          if (dayOfWeek !== 0 && dayOfWeek !== 6) {
+            days.push({
+              iso: `${cursor.getFullYear()}-${String(cursor.getMonth() + 1).padStart(2, "0")}-${String(cursor.getDate()).padStart(2, "0")}`,
+              label: `${dayNames[dayOfWeek]} ${String(cursor.getDate()).padStart(2, "0")}/${String(cursor.getMonth() + 1).padStart(2, "0")}`,
+              monthShort: monthNames[cursor.getMonth()],
+              dayNumber: cursor.getDate(),
+            });
+          }
+          cursor.setDate(cursor.getDate() + 1);
+        }
+        return days;
+      }
+
+      // 8. Renderizar tarjetas de profesionales
+      const professionalsList = document.getElementById("professionalsList");
+      const availabilityError = document.getElementById("availabilityError");
+      const filtered = filterProfessionals();
+
+      if (filtered.length === 0) {
+        availabilityError.hidden = false;
+        professionalsList.innerHTML = "";
+      } else {
+        availabilityError.hidden = true;
+
+        filtered.forEach((prof) => {
+          // Días disponibles: 3 próximos días hábiles (distintos por profesional para variedad)
+          const allDays = getNextAvailableDays(7);
+          const profDays = allDays.slice(prof.id % 3, (prof.id % 3) + 3);
+
+          const card = document.createElement("article");
+          card.className = "professional-card";
+          card.dataset.professionalId = prof.id;
+
+          const initials = prof.name
+            .replace(/^(Dr\.|Dra\.|Lic\.|Tec\.)\s*/, "")
+            .split(" ")
+            .map((w) => w[0])
+            .join("")
+            .slice(0, 2)
+            .toUpperCase();
+
+          card.innerHTML = `
+            <div class="doctor-info">
+              <div class="doctor-avatar">${initials}</div>
+              <div>
+                <h3>${prof.name}</h3>
+                <p>${prof.service}</p>
+                <span class="doctor-location">Sede ${prof.place}</span>
+              </div>
+            </div>
+            <div class="doctor-availability">
+              <h4>Días disponibles</h4>
+              <div class="available-days">
+                ${profDays
+                  .map(
+                    (d) =>
+                      `<button type="button" class="day-option" data-date="${d.iso}" aria-pressed="false">${d.label}</button>`,
+                  )
+                  .join("")}
+              </div>
+              <h4>Horarios disponibles</h4>
+              <div class="available-times">
+                ${prof.slots
+                  .map(
+                    (slot) =>
+                      `<label class="time-option">
+                        <input type="radio" name="horario-${prof.id}" value="${slot}" />
+                        <span>${slot}</span>
+                      </label>`,
+                  )
+                  .join("")}
+              </div>
+            </div>
+          `;
+
+          // Selección de día
+          card
+            .querySelector(".available-days")
+            .addEventListener("click", (event) => {
+              const button = event.target.closest(".day-option");
+              if (!button) return;
+              card.querySelectorAll(".day-option").forEach((day) => {
+                day.classList.toggle("selected", day === button);
+                day.setAttribute("aria-pressed", String(day === button));
+              });
+            });
+
+          professionalsList.appendChild(card);
+        });
+      }
+
+      // 9. Validar y guardar selección al tocar "Continuar"
+      const continueButton = document.getElementById("continueButton");
+
+      continueButton.addEventListener("click", () => {
+        // Buscar la tarjeta con día seleccionado
+        const selectedCard = document.querySelector(
+          ".professional-card:has(.day-option.selected)",
+        );
+        if (!selectedCard) {
+          availabilityError.hidden = false;
+          availabilityError.querySelector("p").textContent =
+            "Elegí un profesional, un día y un horario para continuar.";
+          return;
+        }
+
+        // Día seleccionado
+        const selectedDay = selectedCard.querySelector(".day-option.selected");
+        const selectedDate = selectedDay.dataset.date;
+
+        // Horario seleccionado
+        const selectedTime = selectedCard.querySelector(
+          'input[type="radio"]:checked',
+        );
+        if (!selectedTime) {
+          availabilityError.hidden = false;
+          availabilityError.querySelector("p").textContent =
+            "Elegí un horario disponible para continuar.";
+          return;
+        }
+
+        // Datos del profesional
+        const profId = Number(selectedCard.dataset.professionalId);
+        const professional = PROFESSIONALS.find((p) => p.id === profId);
+
+        // Guardar la selección en sessionStorage
+        const seleccion = {
+          professionalId: professional.id,
+          professionalName: professional.name,
+          place: `OesteSalud - ${professional.place}`,
+          date: selectedDate,
+          dateLabel: selectedDay.textContent.trim(),
+          time: selectedTime.value,
+        };
+        sessionStorage.setItem(
+          "oestesalud-seleccion",
+          JSON.stringify(seleccion),
+        );
+
+        // Redirigir
+        window.location.href = "confirmar-turno.html";
+      });
+    </script>
   </body>
 </html>

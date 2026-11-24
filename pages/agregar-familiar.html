@@ -17,16 +17,19 @@
       <div class="container nav-wrap">
         <a class="brand" href="../index.html" aria-label="OesteSalud, inicio">
           <span class="brand-mark" aria-hidden="true">+</span>
-          <span>Oeste<span class="brand-accent">Salud</span><small>INSTITUCIÓN MÉDICA</small></span>
+          <span
+            >Oeste<span class="brand-accent">Salud</span
+            ><small>INSTITUCIÓN MÉDICA</small></span
+          >
         </a>
-        <nav class="main-nav" aria-label="Navegación principal">
-          <a href="../index.html#servicios">Servicios</a>
-          <a href="../index.html#sedes">Nuestras sedes</a>
-          <a href="../index.html#nosotros">Quiénes somos</a>
-        </nav>
+
         <div class="nav-actions logged-in-actions">
-          <span class="login-link">Hola, Ana María</span>
-          <a class="button button-small" href="../index.html">Cerrar sesión</a>
+          <a class="login-link" href="mi-perfil.html" id="profileLink"
+            >Mi perfil</a
+          >
+          <a class="button button-small" href="../index.html" id="logoutLink"
+            >Cerrar sesión</a
+          >
         </div>
       </div>
     </header>
@@ -42,26 +45,48 @@
         <aside class="family-overview">
           <div class="family-overview-icon" aria-hidden="true">♡</div>
           <h2>Personas vinculadas</h2>
-          <p>Los familiares que agregues aparecerán por nombre en el selector de paciente al solicitar un turno.</p>
+          <p>
+            Los familiares que agregues aparecerán por nombre en el selector de
+            paciente al solicitar un turno.
+          </p>
           <div id="familyList" class="family-list"></div>
         </aside>
 
         <section class="booking-form">
           <h2>Agregar familiar</h2>
-          <p class="form-description">Completá sus datos tal como aparecen en su documento.</p>
+          <p class="form-description">
+            Completá sus datos tal como aparecen en su documento.
+          </p>
           <form id="familyForm">
             <div class="family-form-grid">
               <div class="form-group">
                 <label for="firstName">Nombre</label>
-                <input id="firstName" name="firstName" autocomplete="given-name" required />
+                <input
+                  id="firstName"
+                  name="firstName"
+                  autocomplete="given-name"
+                  required
+                />
               </div>
               <div class="form-group">
                 <label for="lastName">Apellido</label>
-                <input id="lastName" name="lastName" autocomplete="family-name" required />
+                <input
+                  id="lastName"
+                  name="lastName"
+                  autocomplete="family-name"
+                  required
+                />
               </div>
               <div class="form-group">
                 <label for="dni">DNI</label>
-                <input id="dni" name="dni" inputmode="numeric" pattern="[0-9. ]{7,12}" title="Ingresá un DNI válido" required />
+                <input
+                  id="dni"
+                  name="dni"
+                  inputmode="numeric"
+                  pattern="[0-9. ]{7,12}"
+                  title="Ingresá un DNI válido"
+                  required
+                />
               </div>
               <div class="form-group">
                 <label for="relationship">Vínculo</label>
@@ -77,7 +102,9 @@
             <p class="family-message" id="familyMessage" role="status"></p>
             <div class="form-buttons">
               <a href="panel-principal.html" class="btn-cancel">Cancelar</a>
-              <button type="submit" class="btn-primary">Guardar familiar</button>
+              <button type="submit" class="btn-primary">
+                Guardar familiar
+              </button>
             </div>
           </form>
         </section>
@@ -90,20 +117,46 @@
           <strong>OesteSalud | TurnoSalud</strong>
           <p>Av. Rivadavia 13.850, Ramos Mejía · Zona Oeste</p>
           <p>Atención: lunes a viernes de 8 a 20 hs · (011) 4658-2040</p>
-          <a href="mailto:contacto@oestesalud.com.ar">contacto@oestesalud.com.ar</a>
+          <a href="mailto:contacto@oestesalud.com.ar"
+            >contacto@oestesalud.com.ar</a
+          >
         </div>
-        <small>© 2026 OesteSalud. Institución ficticia para el proyecto académico.</small>
+        <small
+          >© 2026 OesteSalud. Institución ficticia para el proyecto
+          académico.</small
+        >
       </div>
     </footer>
 
     <script>
+      // 1. Usuario logueado
+      const activeUser = JSON.parse(
+        sessionStorage.getItem("oestesalud-usuario-activo") || "null",
+      );
+      if (!activeUser) {
+        window.location.href = "iniciar-sesion.html";
+      }
+
+      // 2. Logout
+      const logoutLink = document.getElementById("logoutLink");
+      if (logoutLink) {
+        logoutLink.addEventListener("click", () => {
+          sessionStorage.removeItem("oestesalud-usuario-activo");
+        });
+      }
+
+      // 3. Familiares del usuario logueado
       const familyStorageKey = "oestesalud-familia";
       const familyForm = document.getElementById("familyForm");
       const familyMessage = document.getElementById("familyMessage");
       const familyList = document.getElementById("familyList");
 
-      function getFamilyMembers() {
+      function getAllFamily() {
         return JSON.parse(localStorage.getItem(familyStorageKey) || "[]");
+      }
+
+      function getFamilyMembers() {
+        return getAllFamily().filter((m) => m.userDni === activeUser.dni);
       }
 
       function renderFamilyMembers() {
@@ -137,19 +190,29 @@
           fullName: `${firstName} ${lastName}`,
           dni: formData.get("dni").trim(),
           relationship: formData.get("relationship"),
+          userDni: activeUser.dni,
         };
-        const members = getFamilyMembers();
-        if (members.some((item) => item.dni === member.dni)) {
+
+        const all = getAllFamily();
+
+        // Validar DNI duplicado SOLO entre los familiares del mismo usuario
+        const mine = all.filter((m) => m.userDni === activeUser.dni);
+        if (mine.some((item) => item.dni === member.dni)) {
           familyMessage.textContent = "Ya agregaste a una persona con ese DNI.";
           return;
         }
+
         try {
-          localStorage.setItem(familyStorageKey, JSON.stringify([...members, member]));
+          localStorage.setItem(
+            familyStorageKey,
+            JSON.stringify([...all, member]),
+          );
           familyForm.reset();
           familyMessage.textContent = `${member.fullName} ya está disponible para seleccionar al pedir un turno.`;
           renderFamilyMembers();
         } catch {
-          familyMessage.textContent = "No se pudo guardar el familiar en este navegador. Probá nuevamente.";
+          familyMessage.textContent =
+            "No se pudo guardar el familiar en este navegador. Probá nuevamente.";
         }
       });
 

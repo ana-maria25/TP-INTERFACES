@@ -24,15 +24,13 @@
           >
         </a>
 
-        <nav class="main-nav" aria-label="Navegación principal">
-          <a href="../index.html#servicios">Servicios</a>
-          <a href="../index.html#sedes">Nuestras sedes</a>
-          <a href="../index.html#nosotros">Quiénes somos</a>
-        </nav>
-
         <div class="nav-actions logged-in-actions">
-          <span class="login-link">Hola, Ana María</span>
-          <a class="button button-small" href="../index.html">Cerrar sesión</a>
+          <a class="login-link" href="mi-perfil.html" id="profileLink"
+            >Mi perfil</a
+          >
+          <a class="button button-small" href="../index.html" id="logoutLink"
+            >Cerrar sesión</a
+          >
         </div>
       </div>
     </header>
@@ -68,74 +66,107 @@
       <!-- FORMULARIO -->
       <section class="booking-form">
         <h2>Datos para tu consulta</h2>
-
         <p class="form-description">
           Elegí al paciente y completá los datos de la consulta.
         </p>
 
-        <!-- SELECCIONAR PACIENTE -->
+        <!-- PACIENTE -->
         <div class="form-group">
           <label for="paciente">Seleccionar paciente</label>
-
-          <select id="paciente" name="paciente">
-            <option value="Ana María González">Ana María González</option>
+          <select id="paciente" name="paciente" required>
+            <option value="">Cargando...</option>
           </select>
         </div>
 
         <!-- COBERTURA -->
         <div class="form-group">
           <label for="cobertura">Tipo de cobertura</label>
-
-          <select id="cobertura" name="cobertura">
+          <select id="cobertura" name="cobertura" required>
             <option value="">Seleccionar cobertura</option>
-            <option value="obra-social">Obra social</option>
-            <option value="prepaga">Prepaga</option>
-            <option value="particular">Particular</option>
+            <option value="Obra social">Obra social</option>
+            <option value="Prepaga">Prepaga</option>
+            <option value="Particular">Particular</option>
           </select>
         </div>
 
-        <!-- ESPECIALIDAD -->
+        <!-- TIPO: ESPECIALIDAD O ESTUDIO -->
         <div class="form-group">
-          <label for="especialidad">Especialidad médica</label>
+          <label>Tipo de atención</label>
+          <div class="type-toggle">
+            <label class="type-option">
+              <input
+                type="radio"
+                name="tipoAtencion"
+                value="specialty"
+                checked
+              />
+              <span>Especialidad</span>
+            </label>
+            <label class="type-option">
+              <input type="radio" name="tipoAtencion" value="study" />
+              <span>Estudio</span>
+            </label>
+          </div>
+        </div>
 
+        <!-- ESPECIALIDAD (visible por defecto) -->
+        <div class="form-group" id="specialtyGroup">
+          <label for="especialidad">Especialidad médica</label>
           <select id="especialidad" name="especialidad">
             <option value="">Seleccionar especialidad</option>
-            <option value="clinica">Clínica médica</option>
-            <option value="cardiologia">Cardiología</option>
-            <option value="dermatologia">Dermatología</option>
-            <option value="ginecologia">Ginecología</option>
-            <option value="pediatria">Pediatría</option>
-            <option value="traumatologia">Traumatología</option>
-            <option value="oftalmologia">Oftalmología</option>
-            <option value="odontologia">Odontología</option>
+            <option value="Clínica médica">Clínica médica</option>
+            <option value="Cardiología">Cardiología</option>
+            <option value="Ginecología">Ginecología</option>
+            <option value="Traumatología">Traumatología</option>
+          </select>
+        </div>
+
+        <!-- ESTUDIO (oculto por defecto) -->
+        <div class="form-group" id="studyGroup" hidden>
+          <label for="estudio">Estudio médico</label>
+          <select id="estudio" name="estudio">
+            <option value="">Seleccionar estudio</option>
+            <option value="Análisis de sangre">Análisis de sangre</option>
+            <option value="Ecografía abdominal">Ecografía abdominal</option>
+            <option value="Ecografía de partes blandas">
+              Ecografía de partes blandas
+            </option>
+            <option value="Radiografía de tórax">Radiografía de tórax</option>
+            <option value="Chequeo ginecológico integral">
+              Chequeo ginecológico integral
+            </option>
           </select>
         </div>
 
         <!-- SEDE -->
         <div class="form-group">
           <label for="sede">Centro de atención</label>
-
-          <select id="sede" name="sede">
+          <select id="sede" name="sede" required>
             <option value="">Seleccionar sede</option>
-            <option value="san-justo">San Justo</option>
-            <option value="ramos-mejia">Ramos Mejía</option>
-            <option value="moron">Morón</option>
-            <option value="laferrere">Laferrere</option>
+            <option value="San Justo">San Justo</option>
+            <option value="Ramos Mejía">Ramos Mejía</option>
+            <option value="Morón">Morón</option>
+            <option value="Laferrere">Laferrere</option>
+            <option value="all">Mostrar todos los centros</option>
           </select>
-
           <small
-            >La disponibilidad dependerá de la especialidad y sede
-            seleccionadas.</small
+            >Si elegís "Todos los centros", verás disponibilidad en todas las
+            sedes.</small
           >
+        </div>
+
+        <!-- MENSAJE DE ERROR -->
+        <div class="login-error" id="bookingError" role="alert" hidden>
+          <span class="login-error-icon" aria-hidden="true">!</span>
+          <p>Completá todos los campos para continuar.</p>
         </div>
 
         <!-- BOTONES -->
         <div class="form-buttons">
-          <a href="panel-principal.html" class="btn-cancel"> Cancelar </a>
-
-          <a href="profesionales-disponibilidad.html" class="btn-primary">
+          <a href="panel-principal.html" class="btn-cancel">Cancelar</a>
+          <button type="button" class="btn-primary" id="continueButton">
             Continuar →
-          </a>
+          </button>
         </div>
       </section>
     </main>
@@ -147,18 +178,116 @@
       </div>
     </footer>
     <script>
-      const familyMembers = JSON.parse(localStorage.getItem("oestesalud-familia") || "[]");
-      const patientSelect = document.getElementById("paciente");
+      // 1. Leer usuario logueado
+      const activeUser = JSON.parse(
+        sessionStorage.getItem("oestesalud-usuario-activo") || "null",
+      );
 
+      // 2. Si no hay sesión, redirigir al login
+      if (!activeUser) {
+        window.location.href = "iniciar-sesion.html";
+      }
+
+      // 3. Logout
+      const logoutLink = document.getElementById("logoutLink");
+      if (logoutLink) {
+        logoutLink.addEventListener("click", () => {
+          sessionStorage.removeItem("oestesalud-usuario-activo");
+        });
+      }
+
+      // 4. Cargar pacientes: usuario logueado + familiares
+      const patientSelect = document.getElementById("paciente");
+      const allFamily = JSON.parse(
+        localStorage.getItem("oestesalud-familia") || "[]",
+      );
+      const familyMembers = allFamily.filter(
+        (m) => m.userDni === activeUser.dni,
+      );
+
+      // Usuario principal (logueado)
+      if (activeUser) {
+        const userFullName =
+          `${activeUser.firstName} ${activeUser.lastName}`.trim();
+        const option = document.createElement("option");
+        option.value = userFullName;
+        option.textContent = `${userFullName} (yo)`;
+        option.dataset.dni = activeUser.dni;
+        patientSelect.appendChild(option);
+      }
+
+      // Familiares vinculados
       familyMembers.forEach((member) => {
         const option = document.createElement("option");
         option.value = member.fullName;
         option.textContent = member.fullName;
+        option.dataset.dni = member.dni;
         patientSelect.appendChild(option);
       });
-      patientSelect.value = sessionStorage.getItem("oestesalud-paciente") || "Ana María González";
-      patientSelect.addEventListener("change", () => {
-        sessionStorage.setItem("oestesalud-paciente", patientSelect.value);
+
+      // Si venía un paciente preseleccionado, lo respetamos
+      const preselected = sessionStorage.getItem("oestesalud-paciente");
+      if (preselected) patientSelect.value = preselected;
+
+      // 5. Toggle especialidad / estudio
+      const typeRadios = document.querySelectorAll(
+        'input[name="tipoAtencion"]',
+      );
+      const specialtyGroup = document.getElementById("specialtyGroup");
+      const studyGroup = document.getElementById("studyGroup");
+
+      typeRadios.forEach((radio) => {
+        radio.addEventListener("change", () => {
+          const isStudy = radio.value === "study" && radio.checked;
+          specialtyGroup.hidden = isStudy;
+          studyGroup.hidden = !isStudy;
+        });
+      });
+
+      // 6. Validar y guardar
+      const continueButton = document.getElementById("continueButton");
+      const bookingError = document.getElementById("bookingError");
+
+      continueButton.addEventListener("click", () => {
+        bookingError.hidden = true;
+
+        const patientOption =
+          patientSelect.options[patientSelect.selectedIndex];
+        const patient = patientSelect.value;
+        const patientDni = patientOption?.dataset?.dni || "";
+        const coverage = document.getElementById("cobertura").value;
+        const type = document.querySelector(
+          'input[name="tipoAtencion"]:checked',
+        ).value;
+        const service =
+          type === "specialty"
+            ? document.getElementById("especialidad").value
+            : document.getElementById("estudio").value;
+        const place = document.getElementById("sede").value;
+
+        // Validaciones
+        if (!patient || !coverage || !service || !place) {
+          bookingError.hidden = false;
+          return;
+        }
+
+        // Guardar en sessionStorage
+        const solicitud = {
+          patient,
+          patientDni,
+          coverage,
+          type,
+          service,
+          place,
+          placeLabel: place === "all" ? "Todos los centros" : place,
+        };
+        sessionStorage.setItem(
+          "oestesalud-solicitud",
+          JSON.stringify(solicitud),
+        );
+
+        // Redirigir
+        window.location.href = "profesionales-disponibilidad.html";
       });
     </script>
   </body>

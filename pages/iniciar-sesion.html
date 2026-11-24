@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Iniciar sesión | TurnoSalud</title>
+    <link rel="stylesheet" href="../css/styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <header class="site-header">
+      <div class="container nav-wrap">
+        <a class="brand" href="../index.html" aria-label="OesteSalud, inicio">
+          <span class="brand-mark" aria-hidden="true">+</span>
+          <span
+            >Oeste<span class="brand-accent">Salud</span
+            ><small>INSTITUCIÓN MÉDICA</small></span
+          >
+        </a>
+
+        <nav class="main-nav" aria-label="Navegación principal">
+          <a href="../index.html#servicios">Servicios</a>
+          <a href="../index.html#sedes">Nuestras sedes</a>
+          <a href="../index.html#nosotros">Quiénes somos</a>
+        </nav>
+
+        <div class="nav-actions">
+          <a class="button button-small" href="crear-cuenta.html"
+            >Crear cuenta</a
+          >
+        </div>
+      </div>
+    </header>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="booking-container">
+      <div class="booking-header">
+        <a href="../index.html" class="back-link">← Volver al inicio</a>
+        <h1>Iniciar sesión</h1>
+        <p>Ingresá con tu DNI y contraseña para acceder a tu panel.</p>
+      </div>
+
+      <!-- FORMULARIO DE LOGIN -->
+      <section class="booking-form" id="loginFormSection">
+        <h2>Acceso a tu cuenta</h2>
+        <p class="form-description">
+          Usá el DNI y la contraseña con los que te registraste.
+        </p>
+
+        <form id="loginForm" novalidate>
+          <div class="form-group">
+            <label for="dni">DNI</label>
+            <input
+              id="dni"
+              name="dni"
+              inputmode="numeric"
+              pattern="[0-9.]{7,10}"
+              title="Ingresá un DNI válido"
+              autocomplete="username"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="password">Contraseña</label>
+            <input
+              id="password"
+              name="password"
+              type="password"
+              autocomplete="current-password"
+              minlength="6"
+              required
+            />
+          </div>
+
+          <!-- MENSAJE DE ERROR (alerta de la consigna) -->
+          <div class="login-error" id="loginError" role="alert" hidden>
+            <span class="login-error-icon" aria-hidden="true">!</span>
+            <p>
+              DNI o contraseña incorrectos. Revisá los datos e intentá
+              nuevamente.
+            </p>
+          </div>
+
+          <div class="form-buttons">
+            <a href="../index.html" class="btn-cancel">Cancelar</a>
+            <button type="submit" class="btn-primary">Ingresar</button>
+          </div>
+        </form>
+
+        <p class="register-login-link">
+          ¿No tenés cuenta? <a href="crear-cuenta.html">Creá una</a>
+        </p>
+      </section>
+    </main>
+
+    <!-- PIE DE PÁGINA -->
+    <footer>
+      <div class="container footer-inner">
+        <div>
+          <strong>OesteSalud | TurnoSalud</strong>
+          <p>Av. Rivadavia 13.850, Ramos Mejía · Zona Oeste</p>
+          <p>Atención: lunes a viernes de 8 a 20 hs · (011) 4658-2040</p>
+          <a href="mailto:contacto@oestesalud.com.ar"
+            >contacto@oestesalud.com.ar</a
+          >
+        </div>
+        <small
+          >© 2026 OesteSalud. Institución ficticia para el proyecto
+          académico.</small
+        >
+      </div>
+    </footer>
+
+    <!-- LÓGICA DEL LOGIN -->
+    <script>
+      const usersStorageKey = "oestesalud-usuarios";
+      const sessionStorageKey = "oestesalud-usuario-activo";
+      const loginForm = document.getElementById("loginForm");
+      const loginError = document.getElementById("loginError");
+
+      function getUsers() {
+        return JSON.parse(localStorage.getItem(usersStorageKey) || "[]");
+      }
+
+      function normalizeDni(value) {
+        return value.replace(/[^0-9]/g, "");
+      }
+
+      loginForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+        loginError.hidden = true;
+
+        const formData = new FormData(loginForm);
+        const dni = normalizeDni(formData.get("dni") || "");
+        const password = formData.get("password") || "";
+
+        // Validación básica
+        if (dni.length < 7 || password.length < 6) {
+          loginError.hidden = false;
+          return;
+        }
+
+        // Buscar usuario
+        const users = getUsers();
+        const user = users.find(
+          (u) => u.dni === dni && u.password === password,
+        );
+
+        if (!user) {
+          loginError.hidden = false;
+          return;
+        }
+
+        // Guardar sesión activa
+        try {
+          sessionStorage.setItem(sessionStorageKey, JSON.stringify(user));
+          window.location.href = "panel-principal.html";
+        } catch {
+          loginError.hidden = false;
+        }
+      });
+    </script>
+  </body>
+</html>

@@ -17,16 +17,17 @@
       <div class="container nav-wrap">
         <a class="brand" href="../index.html" aria-label="OesteSalud, inicio">
           <span class="brand-mark" aria-hidden="true">+</span>
-          <span>Oeste<span class="brand-accent">Salud</span><small>INSTITUCIÓN MÉDICA</small></span>
+          <span
+            >Oeste<span class="brand-accent">Salud</span
+            ><small>INSTITUCIÓN MÉDICA</small></span
+          >
         </a>
-        <nav class="main-nav" aria-label="Navegación principal">
-          <a href="../index.html#servicios">Servicios</a>
-          <a href="../index.html#sedes">Nuestras sedes</a>
-          <a href="../index.html#nosotros">Quiénes somos</a>
-        </nav>
+
         <div class="nav-actions logged-in-actions">
-          <span class="login-link">Hola, Ana María</span>
-          <a class="button button-small" href="../index.html">Cerrar sesión</a>
+          <a class="login-link" href="mi-perfil.html" id="profileLink">Mi perfil</a>
+          <a class="button button-small" href="../index.html" id="logoutLink"
+            >Cerrar sesión</a
+          >
         </div>
       </div>
     </header>
@@ -50,7 +51,10 @@
           </div>
           <details class="study-result">
             <summary>Ver resultado</summary>
-            <p>Resultado listo para consultar. Para el proyecto, este detalle representa el informe del estudio.</p>
+            <p>
+              Resultado listo para consultar. Para el proyecto, este detalle
+              representa el informe del estudio.
+            </p>
             <p><strong>Sede:</strong> OesteSalud - San Justo</p>
           </details>
         </article>
@@ -59,7 +63,9 @@
           <div class="study-card-heading">
             <div class="study-icon" aria-hidden="true">▤</div>
             <div>
-              <p class="study-date">4 de noviembre de 2026 · Diagnóstico por imágenes</p>
+              <p class="study-date">
+                4 de noviembre de 2026 · Diagnóstico por imágenes
+              </p>
               <h2>Radiografía de tórax</h2>
             </div>
             <span class="status">Disponible</span>
@@ -80,7 +86,9 @@
             </div>
             <span class="study-status-pending">En proceso</span>
           </div>
-          <p class="study-note">Te avisaremos cuando el resultado esté disponible.</p>
+          <p class="study-note">
+            Te avisaremos cuando el resultado esté disponible.
+          </p>
         </article>
       </section>
     </main>
@@ -91,10 +99,24 @@
           <strong>OesteSalud | TurnoSalud</strong>
           <p>Av. Rivadavia 13.850, Ramos Mejía · Zona Oeste</p>
           <p>Atención: lunes a viernes de 8 a 20 hs · (011) 4658-2040</p>
-          <a href="mailto:contacto@oestesalud.com.ar">contacto@oestesalud.com.ar</a>
+          <a href="mailto:contacto@oestesalud.com.ar"
+            >contacto@oestesalud.com.ar</a
+          >
         </div>
-        <small>© 2026 OesteSalud. Institución ficticia para el proyecto académico.</small>
+        <small
+          >© 2026 OesteSalud. Institución ficticia para el proyecto
+          académico.</small
+        >
       </div>
     </footer>
+
+    <script>
+      const logoutLink = document.getElementById("logoutLink");
+      if (logoutLink) {
+        logoutLink.addEventListener("click", () => {
+          sessionStorage.removeItem("oestesalud-usuario-activo");
+        });
+      }
+    </script>
   </body>
 </html>

@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mi perfil | TurnoSalud</title>
+    <link rel="stylesheet" href="../css/styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <header class="site-header">
+      <div class="container nav-wrap">
+        <a class="brand" href="../index.html" aria-label="OesteSalud, inicio">
+          <span class="brand-mark" aria-hidden="true">+</span>
+          <span
+            >Oeste<span class="brand-accent">Salud</span
+            ><small>INSTITUCIÓN MÉDICA</small></span
+          >
+        </a>
+
+        <div class="nav-actions logged-in-actions">
+          <a class="login-link" href="#" id="profileLink">Mi perfil</a>
+          <a class="button button-small" href="../index.html" id="logoutLink"
+            >Cerrar sesión</a
+          >
+        </div>
+      </div>
+    </header>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="booking-container">
+      <div class="booking-header">
+        <a href="panel-principal.html" class="back-link">← Volver al panel</a>
+        <h1>Mi perfil</h1>
+        <p>Consultá los datos con los que te registraste en TurnoSalud.</p>
+      </div>
+
+      <!-- TARJETA DE DATOS -->
+      <section class="profile-card" id="profileCard">
+        <div class="profile-card-header">
+          <div class="profile-avatar" id="profileAvatar">M</div>
+          <div>
+            <h2 id="profileFullName">—</h2>
+            <p id="profileDniLabel">DNI —</p>
+          </div>
+        </div>
+
+        <div class="profile-section">
+          <h3>Datos personales</h3>
+          <div class="profile-row">
+            <span>Nombre</span>
+            <strong id="profileFirstName">—</strong>
+          </div>
+          <div class="profile-row">
+            <span>Apellido</span>
+            <strong id="profileLastName">—</strong>
+          </div>
+          <div class="profile-row">
+            <span>Fecha de nacimiento</span>
+            <strong id="profileBirthDate">—</strong>
+          </div>
+          <div class="profile-row">
+            <span>DNI</span>
+            <strong id="profileDni">—</strong>
+          </div>
+        </div>
+
+        <div class="profile-section">
+          <h3>Datos de contacto</h3>
+          <div class="profile-row">
+            <span>Correo electrónico</span>
+            <strong id="profileEmail">—</strong>
+          </div>
+          <div class="profile-row">
+            <span>Celular</span>
+            <strong id="profileMobile">—</strong>
+          </div>
+          <div class="profile-row">
+            <span>Localidad</span>
+            <strong id="profileLocality">—</strong>
+          </div>
+          <div class="profile-row">
+            <span>Domicilio</span>
+            <strong id="profileAddress">—</strong>
+          </div>
+        </div>
+
+        <div class="profile-section">
+          <h3>Seguridad</h3>
+          <div class="profile-row">
+            <span>Contraseña</span>
+            <strong id="profilePassword">••••••••</strong>
+            <button type="button" class="btn-show-password" id="togglePassword">
+              Mostrar
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <div class="profile-actions">
+        <a href="panel-principal.html" class="btn-cancel">Volver al panel</a>
+      </div>
+    </main>
+
+    <!-- PIE DE PÁGINA -->
+    <footer>
+      <div class="container footer-inner">
+        <div>
+          <strong>OesteSalud | TurnoSalud</strong>
+          <p>Av. Rivadavia 13.850, Ramos Mejía · Zona Oeste</p>
+          <p>Atención: lunes a viernes de 8 a 20 hs · (011) 4658-2040</p>
+          <a href="mailto:contacto@oestesalud.com.ar"
+            >contacto@oestesalud.com.ar</a
+          >
+        </div>
+        <small
+          >© 2026 OesteSalud. Institución ficticia para el proyecto
+          académico.</small
+        >
+      </div>
+    </footer>
+
+    <script>
+      // 1. Leer usuario logueado
+      const activeUser = JSON.parse(
+        sessionStorage.getItem("oestesalud-usuario-activo") || "null",
+      );
+
+      // 2. Si no hay sesión, redirigir al login
+      if (!activeUser) {
+        window.location.href = "iniciar-sesion.html";
+      }
+
+      // 3. Cargar datos en la vista
+      if (activeUser) {
+        const firstName = activeUser.firstName || "—";
+        const lastName = activeUser.lastName || "—";
+        const fullName = `${firstName} ${lastName}`.trim();
+
+        const setText = (id, value) => {
+          const el = document.getElementById(id);
+          if (el) el.textContent = value;
+        };
+
+        setText("profileFirstName", firstName);
+        setText("profileLastName", lastName);
+        setText("profileFullName", fullName || "—");
+        setText("profileDniLabel", `DNI ${activeUser.dni || "—"}`);
+        setText("profileDni", activeUser.dni || "—");
+        setText("profileBirthDate", formatDate(activeUser.birthDate));
+        setText("profileEmail", activeUser.email || "—");
+        setText("profileMobile", activeUser.mobile || "—");
+        setText("profileLocality", activeUser.locality || "—");
+        setText("profileAddress", activeUser.address || "—");
+
+        // Avatar con inicial del nombre
+        const avatar = document.getElementById("profileAvatar");
+        if (avatar) avatar.textContent = (firstName[0] || "?").toUpperCase();
+
+        // Contraseña oculta
+        const passwordEl = document.getElementById("profilePassword");
+        const toggleBtn = document.getElementById("togglePassword");
+        let passwordVisible = false;
+
+        if (toggleBtn) {
+          toggleBtn.addEventListener("click", () => {
+            passwordVisible = !passwordVisible;
+            passwordEl.textContent = passwordVisible
+              ? activeUser.password || "—"
+              : "••••••••";
+            toggleBtn.textContent = passwordVisible ? "Ocultar" : "Mostrar";
+          });
+        }
+      }
+
+      // Formatear fecha YYYY-MM-DD → DD/MM/YYYY
+      function formatDate(value) {
+        if (!value) return "—";
+        const [year, month, day] = value.split("-");
+        if (!year || !month || !day) return value;
+        return `${day}/${month}/${year}`;
+      }
+
+      // 4. Cerrar sesión
+      const logoutLink = document.getElementById("logoutLink");
+      if (logoutLink) {
+        logoutLink.addEventListener("click", () => {
+          sessionStorage.removeItem("oestesalud-usuario-activo");
+        });
+      }
+    </script>
+  </body>
+</html>
