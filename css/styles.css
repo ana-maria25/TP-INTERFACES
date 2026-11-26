@@ -861,7 +861,7 @@ footer {
 }
 
 .info-card {
-  background-color: #eaf5f6;
+  background-color: #ffffff;
   padding: 23px;
   border-radius: 12px;
 }
@@ -1183,7 +1183,7 @@ footer {
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 20px;
-  background-color: #eaf5f6;
+  background-color: #ffffff;
   padding: 20px;
   border-radius: 10px;
   margin-bottom: 30px;
@@ -1407,7 +1407,7 @@ footer {
   padding: 22px 26px;
   border: 1px solid #dbe9e9;
   border-radius: 12px;
-  background: linear-gradient(105deg, #f1f8f8 0%, #ffffff 78%);
+  background: #ffffff;
 }
 .dashboard-kicker {
   color: #087f8c;
@@ -1630,7 +1630,7 @@ footer {
 .family-overview {
   padding: 26px;
   border-radius: 12px;
-  background: #eaf5f6;
+  background: #f6f5f5;
 }
 .family-overview-icon {
   display: grid;
@@ -2627,4 +2627,8 @@ footer {
 .footer-simple {
   display: block;
   text-align: center;
+}
+
+body {
+  background: #c2dfd3;
 }

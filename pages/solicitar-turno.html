@@ -215,7 +215,7 @@
           `${activeUser.firstName} ${activeUser.lastName}`.trim();
         const option = document.createElement("option");
         option.value = userFullName;
-        option.textContent = `${userFullName} (yo)`;
+        option.textContent = userFullName;
         option.dataset.dni = activeUser.dni;
         patientSelect.appendChild(option);
       }
