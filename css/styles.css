@@ -2619,3 +2619,12 @@ footer {
     grid-template-columns: 1fr;
   }
 }
+
+/* =================================
+   FOOTER SIMPLE (centrado)
+================================= */
+
+.footer-simple {
+  display: block;
+  text-align: center;
+}
