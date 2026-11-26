@@ -130,7 +130,7 @@ a {
 
 .hero {
   overflow: hidden;
-  background: linear-gradient(112deg, #f4f9f9 0%, #f5fafa 54%, #eaf5f4 100%);
+  background: #c2dfd3;
 }
 .hero-grid {
   min-height: 505px;
@@ -531,7 +531,7 @@ h2 span {
 
 .locations {
   padding: 58px 0 62px;
-  background: #f8fbfb;
+  background: #c2dfd3;
 }
 .locations-inner {
   display: flex;
